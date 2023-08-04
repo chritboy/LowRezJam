@@ -23,17 +23,20 @@ func _ready():
 	anim_tree.active = true
 	
 func _physics_process(_delta):
+	print(current_state)
 	match current_state:
 		MOVE:
 			movement()
 			if Input.is_action_just_pressed("Attack"):
 				current_state = ATTACK
+			elif Input.is_action_just_pressed("Dodge"):
+				current_state = DODGE
 	
 		ATTACK:
 			attack()
 		
 		DODGE:
-			pass
+			dodge()
 	
 	
 func movement():
@@ -42,7 +45,6 @@ func movement():
 	input_vector.y = Input.get_action_strength("Down") - Input.get_action_strength("Up")
 	
 	velocity = input_vector * speed
-	
 	if velocity == Vector2.ZERO:
 		anim_state.travel("Idle")
 	else:
@@ -59,3 +61,43 @@ func attack():
 
 func attack_finished():
 	current_state = MOVE
+
+func dodge():
+	if velocity.y > 0:
+		if velocity.x > 0:
+			velocity.y += 8
+			velocity.x += 6
+		elif velocity.x < 0:
+			velocity.y += 8
+			velocity.x -= 6
+		else:
+			velocity.y += 10
+		anim.play("DodgeDown")
+		
+	elif velocity.y < 0:
+		if velocity.x > 0:
+			velocity.y -= 8
+			velocity.x += 6
+		elif velocity.x < 0:
+			velocity.y -= 8
+			velocity.x -= 6
+		else:
+			velocity.y -= 10
+		anim.play("DodgeUp")
+	
+	elif velocity.x > 0:
+		anim.play("DodgeRight")
+		velocity.x += 10
+	
+	elif velocity.x < 0:
+		anim.play("DodgeLeft")
+		velocity.x -= 10
+	else: 
+		current_state = MOVE
+	
+	move_and_slide()
+
+
+func _on_area_2d_body_entered(body):
+	if current_state == DODGE:
+		current_state = MOVE

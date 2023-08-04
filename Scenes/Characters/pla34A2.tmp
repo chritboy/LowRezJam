@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=3 uid="uid://ep25geblv743"]
+[gd_scene load_steps=42 format=3 uid="uid://ep25geblv743"]
 
 [ext_resource type="Script" path="res://Scenes/Characters/player.gd" id="1_6belg"]
 [ext_resource type="Texture2D" uid="uid://bujo4cxcj0cbg" path="res://Graphics/Characters/Player/walk_sprites.png" id="1_ctt5f"]
@@ -284,7 +284,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_7s1ug"]
 resource_name = "DodgeDown"
-length = 0.35
+length = 0.5
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -297,117 +297,10 @@ tracks/0/keys = {
 "update": 1,
 "values": [5]
 }
-tracks/1/type = "method"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0.3),
-"transitions": PackedFloat32Array(1),
-"values": [{
-"args": [],
-"method": &"attack_finished"
-}]
-}
-
-[sub_resource type="Animation" id="Animation_wny1c"]
-resource_name = "DodgeUp"
-length = 0.35
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [39]
-}
-tracks/1/type = "method"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0.3),
-"transitions": PackedFloat32Array(1),
-"values": [{
-"args": [],
-"method": &"attack_finished"
-}]
-}
-
-[sub_resource type="Animation" id="Animation_8my1s"]
-resource_name = "DodgeRight"
-length = 0.35
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [27]
-}
-tracks/1/type = "method"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0.3),
-"transitions": PackedFloat32Array(1),
-"values": [{
-"args": [],
-"method": &"attack_finished"
-}]
-}
-
-[sub_resource type="Animation" id="Animation_pytyd"]
-resource_name = "DodgeLeft"
-length = 0.35
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [15]
-}
-tracks/1/type = "method"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0.3),
-"transitions": PackedFloat32Array(1),
-"values": [{
-"args": [],
-"method": &"attack_finished"
-}]
-}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_dpy8w"]
 _data = {
 "DodgeDown": SubResource("Animation_7s1ug"),
-"DodgeLeft": SubResource("Animation_pytyd"),
-"DodgeRight": SubResource("Animation_8my1s"),
-"DodgeUp": SubResource("Animation_wny1c"),
 "IdleDown": SubResource("Animation_oma8g"),
 "IdleLeft": SubResource("Animation_ou4hy"),
 "IdleRight": SubResource("Animation_gvq58"),
