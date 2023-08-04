@@ -76,28 +76,27 @@ func dodge():
 		
 	elif velocity.y < 0:
 		if velocity.x > 0:
-			velocity.y -= 8
-			velocity.x += 6
+			velocity.y -= 6
+			velocity.x += 4
 		elif velocity.x < 0:
-			velocity.y -= 8
-			velocity.x -= 6
+			velocity.y -= 6
+			velocity.x -= 4
 		else:
-			velocity.y -= 10
+			velocity.y -= 8
 		anim.play("DodgeUp")
 	
 	elif velocity.x > 0:
 		anim.play("DodgeRight")
-		velocity.x += 10
+		velocity.x += 8
 	
 	elif velocity.x < 0:
 		anim.play("DodgeLeft")
-		velocity.x -= 10
+		velocity.x -= 8
 	else: 
 		current_state = MOVE
 	
 	move_and_slide()
 
-
-func _on_area_2d_body_entered(body):
+func _on_area_2d_body_entered(_body):
 	if current_state == DODGE:
 		current_state = MOVE

@@ -1,0 +1,47 @@
+[gd_scene load_steps=5 format=3 uid="uid://brr1fokxwr6fg"]
+
+[ext_resource type="FontFile" uid="uid://ddhk8u4orhhyp" path="res://GravityRegular5.ttf" id="1_prtqs"]
+[ext_resource type="Script" path="res://Scripts/textbox.gd" id="1_sw4ao"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ccs82"]
+bg_color = Color(0.113725, 0.113725, 0.113725, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_l4h2s"]
+font = ExtResource("1_prtqs")
+font_size = 5
+
+[node name="TextBox" type="CanvasLayer"]
+script = ExtResource("1_sw4ao")
+
+[node name="TextboxContainer" type="MarginContainer" parent="."]
+offset_top = 24.0
+offset_right = 64.0
+offset_bottom = 64.0
+theme_override_constants/margin_left = 1
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 1
+theme_override_constants/margin_bottom = 1
+
+[node name="Panel" type="Panel" parent="TextboxContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_ccs82")
+
+[node name="MarginContainer" type="MarginContainer" parent="TextboxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 2
+theme_override_constants/margin_top = 2
+theme_override_constants/margin_right = 2
+theme_override_constants/margin_bottom = 2
+
+[node name="Panel" type="Panel" parent="TextboxContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="TextboxContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="Dialogue" type="Label" parent="TextboxContainer/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+text = "Text here!"
+label_settings = SubResource("LabelSettings_l4h2s")
