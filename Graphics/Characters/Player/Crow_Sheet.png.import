@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bujo4cxcj0cbg"
-path="res://.godot/imported/walk_sprites.png-2d4da9cf279a2d1db9f5dbd82cb3784a.ctex"
+uid="uid://ppja5y85d3ad"
+path="res://.godot/imported/Crow_Sheet.png-ac5c9a0376a1a6edae3e73d849cf791f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Graphics/Characters/Player/walk_sprites.png"
-dest_files=["res://.godot/imported/walk_sprites.png-2d4da9cf279a2d1db9f5dbd82cb3784a.ctex"]
+source_file="res://Graphics/Characters/Player/Crow_Sheet.png"
+dest_files=["res://.godot/imported/Crow_Sheet.png-ac5c9a0376a1a6edae3e73d849cf791f.ctex"]
 
 [params]
 

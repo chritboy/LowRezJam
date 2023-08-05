@@ -1,7 +1,7 @@
 [gd_scene load_steps=45 format=3 uid="uid://ep25geblv743"]
 
 [ext_resource type="Script" path="res://Scripts/player.gd" id="1_3chws"]
-[ext_resource type="Texture2D" uid="uid://bujo4cxcj0cbg" path="res://Graphics/Characters/Player/walk_sprites.png" id="1_ctt5f"]
+[ext_resource type="Texture2D" uid="uid://ppja5y85d3ad" path="res://Graphics/Characters/Player/Crow_Sheet.png" id="2_ksoyb"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_c0ux4"]
 radius = 4.0
@@ -140,7 +140,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [4]
+"values": [17]
 }
 
 [sub_resource type="Animation" id="Animation_ou4hy"]
@@ -172,7 +172,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [28]
+"values": [17]
 }
 
 [sub_resource type="Animation" id="Animation_5tjc1"]
@@ -188,12 +188,12 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [40]
+"values": [18]
 }
 
 [sub_resource type="Animation" id="Animation_cpd78"]
 resource_name = "MeleeDown"
-length = 0.3
+length = 0.15
 step = 0.05
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -202,7 +202,7 @@ tracks/0/path = NodePath("Sprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2),
+"times": PackedFloat32Array(0, 0.05, 0.1),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
 "values": [0, 1, 2]
@@ -214,7 +214,7 @@ tracks/1/path = NodePath(".")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0.3),
+"times": PackedFloat32Array(0.15),
 "transitions": PackedFloat32Array(1),
 "values": [{
 "args": [],
@@ -224,7 +224,7 @@ tracks/1/keys = {
 
 [sub_resource type="Animation" id="Animation_wxl1t"]
 resource_name = "MeleeLeft"
-length = 0.3
+length = 0.15
 step = 0.05
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -233,7 +233,69 @@ tracks/0/path = NodePath("Sprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2),
+"times": PackedFloat32Array(0, 0.05, 0.1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [4, 5, 6]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.15),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"attack_finished"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_4o4sg"]
+resource_name = "MeleeRight"
+length = 0.15
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [8, 9, 10]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.15),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"attack_finished"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_ouf6d"]
+resource_name = "MeleeUp"
+length = 0.15
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
 "values": [12, 13, 14]
@@ -245,69 +307,7 @@ tracks/1/path = NodePath(".")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0.3),
-"transitions": PackedFloat32Array(1),
-"values": [{
-"args": [],
-"method": &"attack_finished"
-}]
-}
-
-[sub_resource type="Animation" id="Animation_4o4sg"]
-resource_name = "MeleeRight"
-length = 0.3
-step = 0.05
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 1,
-"values": [24, 25, 26]
-}
-tracks/1/type = "method"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0.3),
-"transitions": PackedFloat32Array(1),
-"values": [{
-"args": [],
-"method": &"attack_finished"
-}]
-}
-
-[sub_resource type="Animation" id="Animation_ouf6d"]
-resource_name = "MeleeUp"
-length = 0.3
-step = 0.05
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 1,
-"values": [36, 37, 38]
-}
-tracks/1/type = "method"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0.3),
+"times": PackedFloat32Array(0.15),
 "transitions": PackedFloat32Array(1),
 "values": [{
 "args": [],
@@ -332,7 +332,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_70ak7"]
 resource_name = "WalkDown"
-length = 0.8
+length = 0.3
 loop_mode = 1
 step = 0.05
 tracks/0/type = "value"
@@ -342,15 +342,15 @@ tracks/0/path = NodePath("Sprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.15),
+"transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [3, 4, 5, 4]
+"values": [20, 21]
 }
 
 [sub_resource type="Animation" id="Animation_00fnb"]
 resource_name = "WalkLeft"
-length = 0.8
+length = 0.3
 loop_mode = 1
 step = 0.05
 tracks/0/type = "value"
@@ -360,15 +360,15 @@ tracks/0/path = NodePath("Sprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.15),
+"transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [15, 16, 17, 16]
+"values": [20, 21]
 }
 
 [sub_resource type="Animation" id="Animation_andd2"]
 resource_name = "WalkRight"
-length = 0.8
+length = 0.3
 loop_mode = 1
 step = 0.05
 tracks/0/type = "value"
@@ -378,15 +378,15 @@ tracks/0/path = NodePath("Sprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.15),
+"transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [27, 28, 29, 28]
+"values": [24, 25]
 }
 
 [sub_resource type="Animation" id="Animation_tesrg"]
 resource_name = "WalkUp"
-length = 0.8
+length = 0.3
 loop_mode = 1
 step = 0.05
 tracks/0/type = "value"
@@ -396,10 +396,10 @@ tracks/0/path = NodePath("Sprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.15),
+"transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [39, 40, 41, 40]
+"values": [28, 29]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_dpy8w"]
@@ -519,7 +519,6 @@ states/Walk/position = Vector2(532, 100)
 transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_v41lu"), "Idle", "Walk", SubResource("AnimationNodeStateMachineTransition_ddgqp"), "Walk", "Idle", SubResource("AnimationNodeStateMachineTransition_m1k1x"), "Idle", "MeleeAtk", SubResource("AnimationNodeStateMachineTransition_q125k"), "Walk", "MeleeAtk", SubResource("AnimationNodeStateMachineTransition_m86i4"), "MeleeAtk", "Idle", SubResource("AnimationNodeStateMachineTransition_efj57"), "MeleeAtk", "Walk", SubResource("AnimationNodeStateMachineTransition_two14")]
 
 [node name="Player" type="CharacterBody2D"]
-scale = Vector2(0.5, 0.5)
 script = ExtResource("1_3chws")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -530,8 +529,8 @@ shape = SubResource("CapsuleShape2D_c0ux4")
 
 [node name="Sprite" type="Sprite2D" parent="."]
 position = Vector2(24, 22)
-texture = ExtResource("1_ctt5f")
-hframes = 12
+texture = ExtResource("2_ksoyb")
+hframes = 4
 vframes = 8
 frame = 1
 
