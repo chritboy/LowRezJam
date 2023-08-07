@@ -63,6 +63,16 @@ Dodge={
 ]
 }
 
+[layer_names]
+
+2d_physics/layer_1="Player"
+2d_physics/layer_2="Player Hitbox"
+2d_physics/layer_3="Player Hurtbox"
+2d_physics/layer_4="Enemy"
+2d_physics/layer_5="Enemy Hitbox"
+2d_physics/layer_6="Enemy Hurtbox"
+2d_physics/layer_7="Environment"
+
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0

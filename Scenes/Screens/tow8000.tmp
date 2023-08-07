@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://c5ovfg6v08tfe" path="res://icon.svg" id="1_o3m2t"]
 [ext_resource type="PackedScene" uid="uid://ep25geblv743" path="res://Scenes/Characters/player.tscn" id="2_u111y"]
-[ext_resource type="PackedScene" uid="uid://by6shptjmpnl3" path="res://Scenes/Characters/grunt_enemy.tscn" id="3_sdlcy"]
+[ext_resource type="PackedScene" uid="uid://c2ogwrw0hb684" path="res://Scenes/Characters/grunt_enemy.tscn" id="3_sdlcy"]
 
 [node name="World" type="Node2D"]
 

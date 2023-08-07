@@ -15,6 +15,8 @@ enum {
 @export var friction : float = 0.15
 @export var acceleration : int = 40
 
+@export var knockback_power = 500
+
 var current_state = MOVE
 var is_moving = false
 
@@ -23,7 +25,7 @@ func _ready():
 	anim_tree.active = true
 	
 func _physics_process(_delta):
-	print(current_state)
+#	print(current_state)
 	match current_state:
 		MOVE:
 			movement()
@@ -54,7 +56,7 @@ func movement():
 		anim_state.travel("Walk")
 	
 	move_and_slide()
-
+	
 func attack():
 	velocity = Vector2.ZERO
 	anim_state.travel("MeleeAtk")
@@ -97,6 +99,11 @@ func dodge():
 	
 	move_and_slide()
 
-func _on_area_2d_body_entered(_body):
-	if current_state == DODGE:
-		current_state = MOVE
+func _on_hurtbox_area_entered(area):
+	if area.name == "hitbox":
+		knockback(area.get_parent().velocity)
+
+func knockback(enemy_velocity: Vector2):
+	var knock_dir = (enemy_velocity - velocity).normalized() * knockback_power
+	velocity = knock_dir
+	move_and_slide()
