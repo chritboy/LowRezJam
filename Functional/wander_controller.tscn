@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://ckp3rgs20m3hr"]
 
-[ext_resource type="Script" path="res://Functional/wander_controller.gd" id="1_wmyou"]
+[ext_resource type="Script" path="res://Scripts/wander_controller.gd" id="1_wmyou"]
 
 [node name="WanderController" type="Node2D"]
 script = ExtResource("1_wmyou")

@@ -2,9 +2,12 @@ extends CharacterBody2D
 
 enum {
 	MOVE,
-	ATTACK,
+	MELEEATK,
+	RANGEDATK,
 	DODGE
 }
+
+signal shoot(bullet_scene, location)
 
 @onready var animated_sprite = $Sprite
 @onready var anim = $AnimationPlayer
@@ -13,16 +16,20 @@ enum {
 @onready var anim_effects = $Effects
 @onready var hurt_timer = $HurtTimer
 @onready var hurtbox = $Hurtbox
+@onready var bullet = preload("res://Scenes/Characters/bullet.tscn")
+@onready var muzzle = $Muzzle
 
 @export var speed : int = 50
 @export var friction : float = 0.15
 @export var acceleration : int = 40
 
+var facing = null
 var current_state = MOVE
 var is_moving = false
 var knockback_power = 500
 var invincible = false
 var enemy_collisions = []
+var muzzle_pos = null
 
 func _ready():
 	anim_tree.active = true
@@ -30,17 +37,25 @@ func _ready():
 	anim_effects.play("RESET")
 	
 func _physics_process(_delta):
-#	print(current_state)
+	muzzle_position()
+	ranged_atk()
 	match current_state:
 		MOVE:
 			movement()
 			if Input.is_action_just_pressed("Attack"):
-				current_state = ATTACK
+				current_state = MELEEATK
 			elif Input.is_action_just_pressed("Dodge"):
 				current_state = DODGE
 	
-		ATTACK:
-			attack()
+		MELEEATK:
+			melee_attack()
+		
+		RANGEDATK:
+			anim_state.travel("Idle")
+			if Input.is_action_just_pressed("Attack"):
+				shoot.emit(bullet, muzzle.global_position)
+			if Input.is_action_just_released("Aim"):
+				current_state = MOVE
 		
 		DODGE:
 			dodge()
@@ -66,7 +81,7 @@ func movement():
 		anim_state.travel("Walk")
 	
 	
-func attack():
+func melee_attack():
 	velocity = Vector2.ZERO
 	anim_state.travel("MeleeAtk")
 	
@@ -130,3 +145,18 @@ func _on_hurt_timer_timeout():
 
 func _on_hurtbox_area_exited(area):
 	enemy_collisions.erase(area)
+
+func ranged_atk():
+	if Input.is_action_pressed("Aim"):
+		velocity = Vector2.ZERO
+		current_state = RANGEDATK
+
+func muzzle_position():
+	if velocity.y < 0:
+		muzzle_pos = 2
+	elif velocity.y > 0:
+		muzzle_pos = -2
+	elif velocity.x > 0:
+		muzzle_pos = 1
+	elif velocity.x < 0:
+		muzzle_pos = -1

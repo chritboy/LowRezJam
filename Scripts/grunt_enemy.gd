@@ -71,6 +71,7 @@ func _on_hurtbox_area_entered(area):
 		current_state = DEATH
 	knockback(area.get_parent().velocity)
 	anim_effects.play("Hurt")
+	
 	hurt_timer.start()
 
 func knockback(enemy_velocity):
