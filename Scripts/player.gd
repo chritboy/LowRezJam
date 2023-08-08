@@ -8,6 +8,7 @@ enum {
 }
 
 signal shoot(bullet_scene, location)
+signal health_change
 
 @onready var animated_sprite = $Sprite
 @onready var anim = $AnimationPlayer
@@ -19,7 +20,11 @@ signal shoot(bullet_scene, location)
 @onready var bullet = preload("res://Scenes/Characters/bullet.tscn")
 @onready var muzzle = $Muzzle
 
+@export var max_health = 3
+var current_health = 3
 @export var speed : int = 50
+@export var run_speed : int = 50
+@export var aim_speed : int = 20
 @export var friction : float = 0.15
 @export var acceleration : int = 40
 
@@ -30,6 +35,7 @@ var knockback_power = 500
 var invincible = false
 var enemy_collisions = []
 var muzzle_pos = null
+var ammo = 6
 
 func _ready():
 	anim_tree.active = true
@@ -41,6 +47,7 @@ func _physics_process(_delta):
 	ranged_atk()
 	match current_state:
 		MOVE:
+			speed = run_speed
 			movement()
 			if Input.is_action_just_pressed("Attack"):
 				current_state = MELEEATK
@@ -51,9 +58,11 @@ func _physics_process(_delta):
 			melee_attack()
 		
 		RANGEDATK:
-			anim_state.travel("Idle")
-			if Input.is_action_just_pressed("Attack"):
+			speed = aim_speed
+			movement()
+			if ammo > 0 && Input.is_action_just_pressed("Attack"):
 				shoot.emit(bullet, muzzle.global_position)
+				ammo -= 1
 			if Input.is_action_just_released("Aim"):
 				current_state = MOVE
 		
@@ -127,8 +136,12 @@ func dodge():
 func hurt_by_enemy(area):
 	knockback(area.get_parent().velocity)
 	anim_effects.play("Hurt_Blink")
+	current_health -= 1
+	if current_health <= 0:
+		current_health = max_health
 	hurt_timer.start()
 	invincible = true
+	health_change.emit(current_health)
 
 func _on_hurtbox_area_entered(area):
 	if area.name == "Hitbox":
