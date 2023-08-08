@@ -15,14 +15,13 @@ enum {
 @export var friction : float = 0.15
 @export var acceleration : int = 40
 
-@export var knockback_power = 500
-
 var current_state = MOVE
 var is_moving = false
 
 
 func _ready():
 	anim_tree.active = true
+	randomize()
 	
 func _physics_process(_delta):
 #	print(current_state)
@@ -40,13 +39,14 @@ func _physics_process(_delta):
 		DODGE:
 			dodge()
 	
+	move_and_slide()
 	
 func movement():
 	var input_vector = Vector2.ZERO
 	input_vector.x = Input.get_action_strength("Right") - Input.get_action_strength("Left")
 	input_vector.y = Input.get_action_strength("Down") - Input.get_action_strength("Up")
 	
-	velocity = input_vector * speed
+	velocity = input_vector.normalized() * speed
 	if velocity == Vector2.ZERO:
 		anim_state.travel("Idle")
 	else:
@@ -55,11 +55,11 @@ func movement():
 		anim_tree.set("parameters/MeleeAtk/blend_position", velocity)
 		anim_state.travel("Walk")
 	
-	move_and_slide()
 	
 func attack():
 	velocity = Vector2.ZERO
 	anim_state.travel("MeleeAtk")
+	
 
 func attack_finished():
 	current_state = MOVE
@@ -100,10 +100,5 @@ func dodge():
 	move_and_slide()
 
 func _on_hurtbox_area_entered(area):
-	if area.name == "hitbox":
-		knockback(area.get_parent().velocity)
-
-func knockback(enemy_velocity: Vector2):
-	var knock_dir = (enemy_velocity - velocity).normalized() * knockback_power
-	velocity = knock_dir
-	move_and_slide()
+	if area.name == "Hitbox":
+		pass

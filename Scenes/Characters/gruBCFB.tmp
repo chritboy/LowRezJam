@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://by6shptjmpnl3"]
+[gd_scene load_steps=16 format=3 uid="uid://by6shptjmpnl3"]
 
 [ext_resource type="Script" path="res://Scripts/grunt_enemy.gd" id="1_15vax"]
 [ext_resource type="Texture2D" uid="uid://dstqrplfbf6xb" path="res://Graphics/Characters/Enemies/WalkingGrunts.png" id="1_j536y"]
@@ -6,12 +6,6 @@
 [ext_resource type="PackedScene" uid="uid://c7fwctti5sod1" path="res://Functional/hitbox.tscn" id="4_0qkcy"]
 [ext_resource type="PackedScene" uid="uid://cbm8ulw6f5tgi" path="res://Functional/soft_collision.tscn" id="5_8enso"]
 [ext_resource type="PackedScene" uid="uid://ckp3rgs20m3hr" path="res://Functional/wander_controller.tscn" id="6_wc2al"]
-[ext_resource type="PackedScene" uid="uid://t4fjiu0q7e2i" path="res://Functional/stats.tscn" id="7_l3plf"]
-[ext_resource type="PackedScene" uid="uid://ragww45op1jb" path="res://Functional/player_detection.tscn" id="8_gyigq"]
-
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_7d65g"]
-radius = 3.0
-height = 8.0
 
 [sub_resource type="Animation" id="Animation_50kmv"]
 length = 0.001
@@ -27,52 +21,10 @@ tracks/0/keys = {
 "update": 1,
 "values": [0]
 }
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite2D:scale")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(1, 1)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Sprite2D:position")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(0, 0)]
-}
-
-[sub_resource type="Animation" id="Animation_gei6w"]
-resource_name = "V1_Hurt"
-length = 0.2
-step = 0.05
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:scale")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(1, 1), Vector2(0.7, 1.2)]
-}
 
 [sub_resource type="Animation" id="Animation_umsln"]
 resource_name = "V1_Idle"
-length = 3.0
-loop_mode = 1
+length = 0.01
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -84,30 +36,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [0]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite2D:scale")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 1.5, 3),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Vector2(1, 1), Vector2(1, 1.1), Vector2(1, 1)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Sprite2D:position")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 1.5, 3),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Vector2(0, 0), Vector2(0, -0.4), Vector2(0, 0)]
 }
 
 [sub_resource type="Animation" id="Animation_jdlhy"]
@@ -131,21 +59,25 @@ tracks/0/keys = {
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_v5ujy"]
 _data = {
 "RESET": SubResource("Animation_50kmv"),
-"V1_Hurt": SubResource("Animation_gei6w"),
 "V1_Idle": SubResource("Animation_umsln"),
 "V1_Walk": SubResource("Animation_jdlhy")
 }
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_shs8d"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_k0clb"]
+size = Vector2(6, 7)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_7d65g"]
 radius = 3.0
 height = 8.0
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_uckyr"]
-radius = 2.0
-height = 9.0
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_k6lqi"]
+size = Vector2(8, 9)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_1j2gx"]
 radius = 5.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_lfxhn"]
+radius = 42.0
 
 [node name="EnemyGrunt" type="CharacterBody2D"]
 y_sort_enabled = true
@@ -155,15 +87,15 @@ collision_mask = 77
 motion_mode = 1
 wall_min_slide_angle = 0.0
 script = ExtResource("1_15vax")
+chase_speed = null
+wander_speed = null
+acceleration = null
+friction = null
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_j536y")
 hframes = 2
 vframes = 6
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
-shape = SubResource("CapsuleShape2D_7d65g")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -171,50 +103,47 @@ libraries = {
 }
 
 [node name="Hurtbox" parent="." instance=ExtResource("3_dsgwk")]
-visible = false
-collision_layer = 32
+collision_layer = 16
 collision_mask = 2
 
 [node name="CollisionShape2D" parent="Hurtbox" index="0"]
-shape = SubResource("CapsuleShape2D_shs8d")
+position = Vector2(0, -0.5)
+shape = SubResource("RectangleShape2D_k0clb")
 
-[node name="HurtTimer" type="Timer" parent="Hurtbox"]
-wait_time = 0.3
-one_shot = true
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_7d65g")
 
 [node name="Hitbox" parent="." instance=ExtResource("4_0qkcy")]
+visible = false
 collision_layer = 16
 collision_mask = 4
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="Hitbox"]
 position = Vector2(0, -0.5)
-shape = SubResource("CapsuleShape2D_uckyr")
+shape = SubResource("RectangleShape2D_k6lqi")
 
 [node name="WaitTimer" type="Timer" parent="."]
 wait_time = 3.0
 one_shot = true
 
 [node name="SoftCollision" parent="." instance=ExtResource("5_8enso")]
-visible = false
 
 [node name="CollisionShape2D" parent="SoftCollision" index="0"]
 shape = SubResource("CircleShape2D_1j2gx")
 
 [node name="WanderController" parent="." instance=ExtResource("6_wc2al")]
 
-[node name="Stats" parent="." instance=ExtResource("7_l3plf")]
-max_health = 2
+[node name="AggroRange" type="Area2D" parent="."]
+collision_layer = 0
 
-[node name="PlayerDetection" parent="." instance=ExtResource("8_gyigq")]
-visible = false
-
-[node name="CollisionShape2D" parent="PlayerDetection" index="0"]
-modulate = Color(1, 1, 1, 0.196078)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AggroRange"]
+modulate = Color(0.933333, 0.184314, 0, 0.196078)
+shape = SubResource("CircleShape2D_lfxhn")
 
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_hurtbox_area_entered"]
-[connection signal="timeout" from="Hurtbox/HurtTimer" to="." method="_on_hurt_timer_timeout"]
 [connection signal="timeout" from="WaitTimer" to="." method="_on_wait_timer_timeout"]
+[connection signal="body_entered" from="AggroRange" to="." method="_on_aggro_range_body_entered"]
+[connection signal="body_exited" from="AggroRange" to="." method="_on_aggro_range_body_exited"]
 
 [editable path="Hurtbox"]
 [editable path="SoftCollision"]
-[editable path="PlayerDetection"]
