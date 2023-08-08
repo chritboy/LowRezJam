@@ -4,7 +4,7 @@ enum {
 	IDLE,
 	WANDER,
 	CHASE,
-	HURT
+	DEATH
 }
 
 @onready var stats = $Stats
@@ -12,13 +12,16 @@ enum {
 @onready var anim_player = $AnimationPlayer
 @onready var soft_coll = $SoftCollision
 @onready var wander_control = $WanderController
-@onready var hurt_timer = $Hurtbox/HurtTimer
+@onready var anim_effects = $Effects
+@onready var hurt_timer = $HurtTimer
+@onready var hitbox = $Hitbox/CollisionShape2D2
 
 var wander_speed = 5
 var chase_speed = 30
 var acceleration = 150
 var friction = 50
 var current_state = IDLE
+var knockback_power = 50
 
 
 func _physics_process(delta):
@@ -49,10 +52,12 @@ func _physics_process(delta):
 				velocity = velocity.move_toward(dir * chase_speed, acceleration * delta)
 			else:
 				current_state = IDLE
-				
-		HURT:
-			velocity = Vector2.ZERO
-			anim_player.play("V1_Hurt")
+		
+		DEATH:
+			hitbox.disabled = true
+			anim_effects.play("Death")
+			await anim_effects.animation_finished
+			queue_free()
 			
 	if soft_coll.is_colliding():
 		velocity += soft_coll.get_push_vector() * delta * 200
@@ -63,11 +68,16 @@ func _physics_process(delta):
 func _on_hurtbox_area_entered(area):
 	stats.health -= area.damage
 	if stats.health <= 0:
-		queue_free()
-	else:
-		hurt_timer.start()
-		current_state = HURT
+		current_state = DEATH
+	knockback(area.get_parent().velocity)
+	anim_effects.play("Hurt")
+	hurt_timer.start()
 
+func knockback(enemy_velocity):
+	var knockback_dir = (enemy_velocity - velocity).normalized() * knockback_power
+	velocity = knockback_dir
+	move_and_slide()
+		
 func seek_player():
 	if player_detection.can_see_player():
 		current_state = CHASE
@@ -82,5 +92,4 @@ func state_picker():
 		wander_control.start_wander_timer(randi_range(1, 3))
 
 func _on_hurt_timer_timeout():
-	current_state = IDLE
-
+	anim_effects.play("RESET")

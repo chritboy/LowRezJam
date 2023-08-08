@@ -228,9 +228,6 @@ sources/0 = SubResource("TileSetAtlasSource_pg57v")
 [node name="Player" parent="." instance=ExtResource("2_u111y")]
 position = Vector2(69, 93)
 
-[node name="Camera2D" type="Camera2D" parent="Player"]
-zoom = Vector2(0.5, 0.5)
-
 [node name="TileMap" type="TileMap" parent="."]
 scale = Vector2(1, 0.997703)
 tile_set = SubResource("TileSet_rawg4")

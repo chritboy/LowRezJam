@@ -10,6 +10,9 @@ enum {
 @onready var anim = $AnimationPlayer
 @onready var anim_tree = $AnimationTree
 @onready var anim_state = anim_tree.get("parameters/playback")
+@onready var anim_effects = $Effects
+@onready var hurt_timer = $HurtTimer
+@onready var hurtbox = $Hurtbox
 
 @export var speed : int = 50
 @export var friction : float = 0.15
@@ -17,11 +20,14 @@ enum {
 
 var current_state = MOVE
 var is_moving = false
-
+var knockback_power = 500
+var invincible = false
+var enemy_collisions = []
 
 func _ready():
 	anim_tree.active = true
 	randomize()
+	anim_effects.play("RESET")
 	
 func _physics_process(_delta):
 #	print(current_state)
@@ -41,6 +47,10 @@ func _physics_process(_delta):
 	
 	move_and_slide()
 	
+	if !invincible:
+		for enemy_area in enemy_collisions:
+			hurt_by_enemy(enemy_area)
+			
 func movement():
 	var input_vector = Vector2.ZERO
 	input_vector.x = Input.get_action_strength("Right") - Input.get_action_strength("Left")
@@ -99,6 +109,24 @@ func dodge():
 	
 	move_and_slide()
 
+func hurt_by_enemy(area):
+	knockback(area.get_parent().velocity)
+	anim_effects.play("Hurt_Blink")
+	hurt_timer.start()
+	invincible = true
+
 func _on_hurtbox_area_entered(area):
 	if area.name == "Hitbox":
-		pass
+		enemy_collisions.append(area)
+		
+func knockback(enemy_velocity):
+	var knockback_dir = (enemy_velocity - velocity).normalized() * knockback_power
+	velocity = knockback_dir
+	move_and_slide()
+
+func _on_hurt_timer_timeout():
+	anim_effects.play("RESET")
+	invincible = false
+
+func _on_hurtbox_area_exited(area):
+	enemy_collisions.erase(area)
