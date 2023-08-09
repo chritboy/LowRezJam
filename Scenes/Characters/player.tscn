@@ -1620,7 +1620,7 @@ curve = SubResource("Curve_yhicb")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_jcvk7"]
 emission_shape = 1
-emission_sphere_radius = 10.0
+emission_sphere_radius = 15.0
 particle_flag_disable_z = true
 direction = Vector3(0, 0, 0)
 spread = 180.0
@@ -1734,7 +1734,7 @@ anim_player = NodePath("../AnimationPlayer")
 process_callback = 2
 parameters/Dodge/blend_position = Vector2(0, 0)
 parameters/Hurt/blend_position = Vector2(-0.326513, 0.403141)
-parameters/Idle/blend_position = Vector2(-0.0485933, 0.20524)
+parameters/Idle/blend_position = Vector2(-0.00255752, -0.368421)
 parameters/MeleeATK/blend_position = Vector2(0.0878091, -0.182156)
 parameters/RangedATK/blend_position = Vector2(-0.00255752, 0.97654)
 parameters/Walk/blend_position = Vector2(-0.955669, -0.537118)
@@ -1774,7 +1774,7 @@ position = Vector2(0, 4)
 [node name="DodgeParticles" type="GPUParticles2D" parent="."]
 z_index = 1
 emitting = false
-amount = 10
+amount = 12
 process_material = SubResource("ParticleProcessMaterial_jcvk7")
 texture = ExtResource("6_r37re")
 

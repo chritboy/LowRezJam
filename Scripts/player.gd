@@ -49,7 +49,6 @@ func _physics_process(delta):
 	anim_tree.advance(delta * anim.speed_scale)
 	muzzle_position()
 	ranged_atk()
-	print(invincible)
 	match current_state:
 		MOVE:
 			movement()
