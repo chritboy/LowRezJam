@@ -138,6 +138,7 @@ func _on_hurtbox_area_exited(area):
 func ranged_atk():
 	if Input.is_action_pressed("Aim"):
 		velocity = Vector2.ZERO
+		anim_state.travel("Idle")
 		current_state = RANGEDATK
 
 func muzzle_position():
