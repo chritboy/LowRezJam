@@ -13,7 +13,7 @@ height = 6.0
 
 [sub_resource type="Animation" id="Animation_tm1k2"]
 resource_name = "DodgeDown"
-length = 0.2
+length = 0.42
 step = 0.01
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -22,7 +22,7 @@ tracks/0/path = NodePath("Sprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.02, 0.04, 0.06, 0.08, 0.1, 0.12, 0.14, 0.16, 0.18),
+"times": PackedFloat32Array(0, 0.04, 0.08, 0.12, 0.16, 0.2, 0.24, 0.28, 0.34, 0.4),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": [74, 75, 76, 77, 78, 79, 80, 81, 82, 83]
@@ -34,9 +34,12 @@ tracks/1/path = NodePath(".")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0.2, 1),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0.2, 0.42, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
 "values": [{
+"args": [],
+"method": &"speed_change"
+}, {
 "args": [],
 "method": &"attack_finished"
 }, {
@@ -47,7 +50,7 @@ tracks/1/keys = {
 
 [sub_resource type="Animation" id="Animation_lro6l"]
 resource_name = "DodgeLeft"
-length = 0.2
+length = 0.4
 step = 0.01
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -56,29 +59,15 @@ tracks/0/path = NodePath("Sprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.02, 0.04, 0.06, 0.08, 0.1, 0.12, 0.14, 0.16, 0.18),
+"times": PackedFloat32Array(0, 0.04, 0.08, 0.12, 0.16, 0.2, 0.24, 0.28, 0.32, 0.36),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": [54, 55, 56, 57, 58, 59, 60, 61, 62, 63]
 }
-tracks/1/type = "method"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0.2),
-"transitions": PackedFloat32Array(1),
-"values": [{
-"args": [],
-"method": &"attack_finished"
-}]
-}
 
 [sub_resource type="Animation" id="Animation_8my1s"]
 resource_name = "DodgeRight"
-length = 0.2
+length = 0.3
 step = 0.01
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -87,29 +76,15 @@ tracks/0/path = NodePath("Sprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.02, 0.04, 0.06, 0.08, 0.1, 0.12, 0.14, 0.16, 0.18),
+"times": PackedFloat32Array(0, 0.03, 0.06, 0.09, 0.12, 0.15, 0.18, 0.21, 0.25, 0.29),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": [44, 45, 46, 47, 48, 49, 50, 51, 52, 53]
 }
-tracks/1/type = "method"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0.2),
-"transitions": PackedFloat32Array(1),
-"values": [{
-"args": [],
-"method": &"attack_finished"
-}]
-}
 
 [sub_resource type="Animation" id="Animation_1nmkj"]
 resource_name = "DodgeUp"
-length = 0.2
+length = 0.3
 step = 0.01
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -118,29 +93,15 @@ tracks/0/path = NodePath("Sprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.02, 0.04, 0.06, 0.08, 0.1, 0.12, 0.14, 0.16, 0.18),
+"times": PackedFloat32Array(0, 0.03, 0.06, 0.09, 0.12, 0.15, 0.18, 0.21, 0.25, 0.29),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": [64, 65, 66, 67, 68, 69, 70, 71, 72, 73]
 }
-tracks/1/type = "method"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0.2),
-"transitions": PackedFloat32Array(1),
-"values": [{
-"args": [],
-"method": &"attack_finished"
-}]
-}
 
 [sub_resource type="Animation" id="Animation_mppif"]
 resource_name = "HurtDown"
-length = 0.24
+length = 0.39
 step = 0.01
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -149,7 +110,7 @@ tracks/0/path = NodePath("Sprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.06, 0.12, 0.18),
+"times": PackedFloat32Array(0, 0.09, 0.19, 0.29),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
 "values": [96, 97, 98, 99]
@@ -161,7 +122,7 @@ tracks/1/path = NodePath(".")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0.24),
+"times": PackedFloat32Array(0.39),
 "transitions": PackedFloat32Array(1),
 "values": [{
 "args": [],
@@ -171,7 +132,7 @@ tracks/1/keys = {
 
 [sub_resource type="Animation" id="Animation_ylx7q"]
 resource_name = "HurtLeft"
-length = 0.24
+length = 0.39
 step = 0.01
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -180,7 +141,7 @@ tracks/0/path = NodePath("Sprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.06, 0.12, 0.18),
+"times": PackedFloat32Array(0, 0.09, 0.19, 0.29),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
 "values": [88, 89, 90, 91]
@@ -192,7 +153,7 @@ tracks/1/path = NodePath(".")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0.24),
+"times": PackedFloat32Array(0.39),
 "transitions": PackedFloat32Array(1),
 "values": [{
 "args": [],
@@ -202,7 +163,7 @@ tracks/1/keys = {
 
 [sub_resource type="Animation" id="Animation_2ql41"]
 resource_name = "HurtRight"
-length = 0.24
+length = 0.39
 step = 0.01
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -211,7 +172,7 @@ tracks/0/path = NodePath("Sprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.06, 0.12, 0.18),
+"times": PackedFloat32Array(0, 0.09, 0.19, 0.29),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
 "values": [84, 85, 86, 87]
@@ -223,7 +184,7 @@ tracks/1/path = NodePath(".")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0.24),
+"times": PackedFloat32Array(0.39),
 "transitions": PackedFloat32Array(1),
 "values": [{
 "args": [],
@@ -233,7 +194,7 @@ tracks/1/keys = {
 
 [sub_resource type="Animation" id="Animation_58ky6"]
 resource_name = "HurtUp"
-length = 0.24
+length = 0.39
 step = 0.01
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -242,7 +203,7 @@ tracks/0/path = NodePath("Sprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.06, 0.12, 0.18),
+"times": PackedFloat32Array(0, 0.09, 0.19, 0.29),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
 "values": [92, 93, 94, 95]
@@ -254,7 +215,7 @@ tracks/1/path = NodePath(".")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0.24),
+"times": PackedFloat32Array(0.39),
 "transitions": PackedFloat32Array(1),
 "values": [{
 "args": [],
@@ -1626,7 +1587,7 @@ direction = Vector3(0, 0, 0)
 spread = 180.0
 gravity = Vector3(0, 0, 0)
 initial_velocity_min = 19.0
-initial_velocity_max = 19.0
+initial_velocity_max = 25.0
 angular_velocity_min = -182.0
 orbit_velocity_min = 0.0
 orbit_velocity_max = 0.0
@@ -1772,7 +1733,6 @@ one_shot = true
 position = Vector2(0, 4)
 
 [node name="DodgeParticles" type="GPUParticles2D" parent="."]
-z_index = 1
 emitting = false
 amount = 10
 process_material = SubResource("ParticleProcessMaterial_jcvk7")

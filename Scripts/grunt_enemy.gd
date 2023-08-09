@@ -22,9 +22,17 @@ var acceleration = 150
 var friction = 50
 var current_state = IDLE
 var knockback_power = 50
+var player = null
 
 
+func _ready():
+	player = get_tree().get_first_node_in_group("Player")
+	
 func _physics_process(delta):
+	if player.is_dodging == true:
+		self.set_collision_mask_value(1, false)
+	else:
+		self.set_collision_mask_value(1, true)
 	match current_state:
 		
 		IDLE:
@@ -67,11 +75,11 @@ func _physics_process(delta):
 
 func _on_hurtbox_area_entered(area):
 	stats.health -= area.damage
+	$Blood.emitting = true
 	if stats.health <= 0:
 		current_state = DEATH
 	knockback(area.get_parent().velocity)
 	anim_effects.play("Hurt")
-	
 	hurt_timer.start()
 
 func knockback(enemy_velocity):
@@ -93,4 +101,5 @@ func state_picker():
 		wander_control.start_wander_timer(randi_range(1, 3))
 
 func _on_hurt_timer_timeout():
+	$Blood.emitting = false
 	anim_effects.play("RESET")

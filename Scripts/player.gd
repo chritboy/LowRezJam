@@ -12,20 +12,22 @@ signal shoot(bullet_scene, location)
 signal health_change
 
 @onready var anim = $AnimationPlayer
+@onready var sprite = $Sprite
 @onready var anim_tree = $AnimationTree
 @onready var anim_state = anim_tree.get("parameters/playback")
-@onready var anim_effects = $Effects
+@onready var anim_effects = $AnimationFX
 @onready var hurt_timer = $HurtTimer
 @onready var hurtbox = $Hurtbox/CollisionShape2D2
 @onready var bullet = preload("res://Scenes/Characters/bullet.tscn")
 @onready var muzzle = $Muzzle
+@onready var dodge_particles = $DodgeParticles
 
-@export var max_health = 3
-var current_health = 3
-@export var speed : int = 50
-@export var dodge_speed : int = 70
-@export var friction : float = 0.15
-@export var acceleration : int = 40
+@export var max_health:int = 3
+var current_health: int = 3
+@export var speed: int = 50
+@export var dodge_speed: int = 70
+@export var friction: float = 0.15
+@export var acceleration: int = 40
 
 var facing = null
 var current_state = MOVE
@@ -36,15 +38,18 @@ var enemy_collisions = []
 var muzzle_pos = null
 var ammo = 6
 var dodge_vector = Vector2.DOWN
+var is_dodging = false
 
 func _ready():
 	anim_tree.active = true
 	randomize()
 	anim_effects.play("RESET")
 	
-func _physics_process(_delta):
+func _physics_process(delta):
+	anim_tree.advance(delta * anim.speed_scale)
 	muzzle_position()
 	ranged_atk()
+	print(invincible)
 	match current_state:
 		MOVE:
 			movement()
@@ -66,7 +71,7 @@ func _physics_process(_delta):
 				current_state = MOVE
 		
 		DODGE:
-			anim_state.travel("Dodge")
+			dodge_particles.emitting = true
 			dodge()
 			
 		HURT:
@@ -99,24 +104,32 @@ func melee_attack():
 	velocity = Vector2.ZERO
 
 func attack_finished():
+	self.set_collision_mask_value(4, true)
+	hurtbox.disabled = false
+	is_dodging = false
+	dodge_particles.emitting = false
 	current_state = MOVE
 	anim_state.travel("Idle")
-	hurtbox.disabled = false
 
 func dodge():
+	self.set_collision_mask_value(4, false)
+	is_dodging = true
 	hurtbox.disabled = true
 	velocity = dodge_vector.normalized() * dodge_speed
+	anim_state.travel("Dodge")
+	
 	move_and_slide()
 
 func hurt_by_enemy(area):
+	hurt_timer.start()
 	anim_state.travel("Hurt")
 	current_state = HURT
+	dodge_particles.emitting = true
 	knockback(area.get_parent().velocity)
 	anim_effects.play("Hurt_Blink")
 	current_health -= 1
 	if current_health <= 0:
 		current_health = max_health
-	hurt_timer.start()
 	invincible = true
 	health_change.emit(current_health)
 
