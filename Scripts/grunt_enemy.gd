@@ -62,10 +62,11 @@ func _physics_process(delta):
 				current_state = IDLE
 		
 		DEATH:
-			hitbox.disabled = true
 			anim_effects.play("Death")
-			await anim_effects.animation_finished
-			queue_free()
+			$Blood.emitting = true
+			hitbox.disabled = true
+			self.set_collision_mask_value(1, false)
+			self.set_collision_layer_value(4, false)
 			
 	if soft_coll.is_colliding():
 		velocity += soft_coll.get_push_vector() * delta * 200
@@ -81,6 +82,9 @@ func _on_hurtbox_area_entered(area):
 	knockback(area.get_parent().velocity)
 	anim_effects.play("Hurt")
 	hurt_timer.start()
+
+func vanish():
+	queue_free()
 
 func knockback(enemy_velocity):
 	var knockback_dir = (enemy_velocity - velocity).normalized() * knockback_power
