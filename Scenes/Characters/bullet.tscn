@@ -1,25 +1,59 @@
-[gd_scene load_steps=8 format=3 uid="uid://cphir2qxdqnl"]
+[gd_scene load_steps=13 format=3 uid="uid://cphir2qxdqnl"]
 
 [ext_resource type="Script" path="res://Scripts/bullet.gd" id="1_ki6gi"]
-[ext_resource type="Texture2D" uid="uid://c5ovfg6v08tfe" path="res://icon.svg" id="2_54d6y"]
+[ext_resource type="Texture2D" uid="uid://cqwacf67vs5t2" path="res://Graphics/Characters/Player/Bullet.png" id="2_hfn6n"]
 [ext_resource type="PackedScene" uid="uid://c7fwctti5sod1" path="res://Functional/hitbox.tscn" id="3_8o5yn"]
 [ext_resource type="Script" path="res://Scripts/hitbox.gd" id="4_i5w3r"]
 [ext_resource type="PackedScene" uid="uid://bltrrdetnuw22" path="res://Functional/hurtbox.tscn" id="5_hkigj"]
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_a0ahn"]
+atlas = ExtResource("2_hfn6n")
+region = Rect2(0, 0, 4, 4)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jk05s"]
+atlas = ExtResource("2_hfn6n")
+region = Rect2(4, 0, 4, 4)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0hie1"]
+atlas = ExtResource("2_hfn6n")
+region = Rect2(8, 0, 4, 4)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b2gs7"]
+atlas = ExtResource("2_hfn6n")
+region = Rect2(12, 0, 4, 4)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_bnrj1"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a0ahn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jk05s")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0hie1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b2gs7")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_h8d4s"]
-radius = 100.0
+radius = 1.41421
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_nmg5t"]
-radius = 100.0
+radius = 1.0
 
 [node name="Bullet" type="Area2D" groups=["Bullet"]]
-scale = Vector2(0.01, 0.01)
 script = ExtResource("1_ki6gi")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("2_54d6y")
-
-[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_bnrj1")
+frame_progress = 0.685271
 
 [node name="Hitbox" parent="." instance=ExtResource("3_8o5yn")]
 collision_layer = 2
@@ -27,7 +61,6 @@ collision_mask = 32
 script = ExtResource("4_i5w3r")
 
 [node name="CollisionShape2D" parent="Hitbox" index="0"]
-visible = false
 shape = SubResource("CircleShape2D_h8d4s")
 
 [node name="Hurtbox" parent="." instance=ExtResource("5_hkigj")]
@@ -37,8 +70,12 @@ collision_mask = 72
 [node name="CollisionShape2D" parent="Hurtbox" index="0"]
 shape = SubResource("CircleShape2D_nmg5t")
 
-[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+position = Vector2(8.9407e-08, 5.96046e-08)
+scale = Vector2(0.2, 0.2)
+
 [connection signal="body_entered" from="Hurtbox" to="." method="_on_hurtbox_body_entered"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
 
 [editable path="Hitbox"]
 [editable path="Hurtbox"]

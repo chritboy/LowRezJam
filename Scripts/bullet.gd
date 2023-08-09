@@ -1,6 +1,6 @@
 extends Area2D
 
-@export var speed = 200.0
+@export var speed = 200
 @onready var player = null
 var velocity 
 
@@ -18,9 +18,10 @@ func _process(delta):
 	elif player.muzzle_pos == -2:
 		global_position.y += speed * delta
 
-func _on_visible_on_screen_notifier_2d_screen_exited():
-	queue_free()
 
 
 func _on_hurtbox_body_entered(_body):
+	queue_free()
+
+func _on_visible_on_screen_notifier_2d_screen_exited():
 	queue_free()
