@@ -1,8 +1,9 @@
-[gd_scene load_steps=15 format=3 uid="uid://c4htpnqcj8ih5"]
+[gd_scene load_steps=16 format=3 uid="uid://c4htpnqcj8ih5"]
 
 [ext_resource type="Script" path="res://Scripts/world.gd" id="1_3g2gs"]
 [ext_resource type="PackedScene" uid="uid://ep25geblv743" path="res://Scenes/Characters/player.tscn" id="2_succa"]
 [ext_resource type="Texture2D" uid="uid://cb5j28vlrqny5" path="res://Graphics/Tiles/Tileset.png" id="3_c0ftw"]
+[ext_resource type="PackedScene" uid="uid://6y156x7mfdqe" path="res://Scenes/Characters/exploding_enemy.tscn" id="3_d8a0v"]
 [ext_resource type="Texture2D" uid="uid://4isu7xpm6r5n" path="res://Graphics/UI/gun.png" id="4_820ux"]
 [ext_resource type="Texture2D" uid="uid://dy5xt7i5epcml" path="res://Graphics/Objects/single_potion.png" id="5_rurpo"]
 [ext_resource type="FontFile" uid="uid://bygwwji57plty" path="res://Graphics/UI/m3x6.ttf" id="6_p1rh1"]
@@ -315,6 +316,9 @@ script = ExtResource("1_3g2gs")
 position = Vector2(32.0237, 166.365)
 
 [node name="Enemies" type="Node" parent="." groups=["EnemyHolder"]]
+
+[node name="EnemyGrunt" parent="Enemies" instance=ExtResource("3_d8a0v")]
+position = Vector2(32, 83)
 
 [node name="Tiles" type="Node" parent="."]
 
