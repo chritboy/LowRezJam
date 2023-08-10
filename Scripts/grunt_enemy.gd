@@ -4,7 +4,8 @@ enum {
 	IDLE,
 	WANDER,
 	CHASE,
-	DEATH
+	DEATH,
+	EXPLODE
 }
 
 @onready var stats = $Stats
@@ -16,8 +17,10 @@ enum {
 @onready var hurt_timer = $HurtTimer
 @onready var hitbox = $Hitbox/CollisionShape2D2
 
+@export var exploder = true
+@export var chase_speed = 30
+
 var wander_speed = 5
-var chase_speed = 30
 var acceleration = 150
 var friction = 50
 var current_state = IDLE
@@ -68,6 +71,11 @@ func _physics_process(delta):
 			self.set_collision_mask_value(1, false)
 			self.set_collision_layer_value(4, false)
 			
+		EXPLODE:
+			anim_effects.play("Explode")
+			await anim_effects.animation_finished
+			queue_free()
+			
 	if soft_coll.is_colliding():
 		velocity += soft_coll.get_push_vector() * delta * 200
 		
@@ -107,3 +115,9 @@ func state_picker():
 func _on_hurt_timer_timeout():
 	$Blood.emitting = false
 	anim_effects.play("RESET")
+	
+func stop_move():
+	velocity = Vector2.ZERO
+
+func _on_explode_radius_body_entered(body):
+	current_state = EXPLODE

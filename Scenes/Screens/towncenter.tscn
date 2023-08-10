@@ -1,12 +1,14 @@
-[gd_scene load_steps=15 format=3 uid="uid://c4htpnqcj8ih5"]
+[gd_scene load_steps=17 format=3 uid="uid://c4htpnqcj8ih5"]
 
 [ext_resource type="Script" path="res://Scripts/world.gd" id="1_ltsq2"]
 [ext_resource type="PackedScene" uid="uid://ep25geblv743" path="res://Scenes/Characters/player.tscn" id="2_u111y"]
 [ext_resource type="Texture2D" uid="uid://cb5j28vlrqny5" path="res://Graphics/Tiles/Tileset.png" id="4_sp124"]
 [ext_resource type="PackedScene" uid="uid://se5icbmj2eah" path="res://Functional/hearts_container.tscn" id="5_46m87"]
+[ext_resource type="Texture2D" uid="uid://gskev1vh7d8o" path="res://Graphics/UI/potion.png" id="5_qsvo1"]
 [ext_resource type="Texture2D" uid="uid://4isu7xpm6r5n" path="res://Graphics/UI/gun.png" id="6_5v6q5"]
 [ext_resource type="FontFile" uid="uid://bygwwji57plty" path="res://Graphics/UI/m3x6.ttf" id="7_218jg"]
 [ext_resource type="PackedScene" uid="uid://dnmpwkt1x1pqm" path="res://Scenes/Interactables/ammo.tscn" id="8_erd58"]
+[ext_resource type="PackedScene" uid="uid://6y156x7mfdqe" path="res://Scenes/Characters/exploding_enemy.tscn" id="9_825w4"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_mj0hr"]
 vertices = PackedVector2Array(-4, -4, 4, -4, 4, 4, -4, 4)
@@ -342,41 +344,62 @@ position = Vector2(32, 94)
 
 [node name="Panel" type="Panel" parent="HUD"]
 self_modulate = Color(1, 1, 1, 0.392157)
-offset_left = 32.0
-offset_right = 72.0
-offset_bottom = 10.0
+offset_left = 37.0
+offset_right = 71.0
+offset_bottom = 8.0
 scale = Vector2(0.84, 0.76)
 theme_override_styles/panel = SubResource("StyleBoxFlat_7805n")
 
-[node name="TextureRect" type="TextureRect" parent="HUD"]
-offset_left = 34.0
-offset_top = 2.0
-offset_right = 41.0
-offset_bottom = 8.0
+[node name="Ammo" type="TextureRect" parent="HUD"]
+offset_left = 38.0
+offset_top = 1.0
+offset_right = 43.0
+offset_bottom = 6.0
 scale = Vector2(0.738584, 0.700397)
 texture = ExtResource("6_5v6q5")
 expand_mode = 1
 flip_h = true
 
-[node name="HeartsContainer" parent="HUD" instance=ExtResource("5_46m87")]
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -47.0
-offset_top = 2.0
-offset_right = -47.0
-offset_bottom = 2.0
-grow_horizontal = 0
-scale = Vector2(0.283908, 0.322065)
+[node name="Potions" type="TextureRect" parent="HUD"]
+offset_left = 58.0
+offset_top = 7.0
+offset_right = 63.0
+offset_bottom = 11.0
+texture = ExtResource("5_qsvo1")
+expand_mode = 1
 
-[node name="Label" type="Label" parent="HUD"]
-offset_left = 40.0
-offset_top = -1.0
-offset_right = 49.0
-offset_bottom = 15.0
+[node name="AmmoAmount" type="Label" parent="HUD"]
+offset_left = 43.0
+offset_top = -2.0
+offset_right = 52.0
+offset_bottom = 14.0
 scale = Vector2(0.643342, 0.629119)
 text = "xx"
 label_settings = SubResource("LabelSettings_5hn74")
 
+[node name="PotionAmount" type="Label" parent="HUD"]
+offset_left = 54.0
+offset_top = 4.0
+offset_right = 58.0
+offset_bottom = 20.0
+scale = Vector2(0.643342, 0.629119)
+text = "x"
+label_settings = SubResource("LabelSettings_5hn74")
+
+[node name="HeartsContainer" parent="HUD" instance=ExtResource("5_46m87")]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -48.0
+offset_top = 1.0
+offset_right = -48.0
+offset_bottom = 1.0
+grow_horizontal = 0
+scale = Vector2(0.25, 0.283)
+
 [node name="Ammo" parent="." instance=ExtResource("8_erd58")]
 position = Vector2(35, 59)
+
+[node name="EnemyGrunt" parent="." instance=ExtResource("9_825w4")]
+position = Vector2(10, 12)
+chase_speed = 40

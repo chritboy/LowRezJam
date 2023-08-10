@@ -3,7 +3,8 @@ extends Node2D
 @onready var player_spawn = $PlayerSpawn
 @onready var bullet_container = $Bullets
 @onready var hearts_container = $HUD/HeartsContainer
-@onready var ammo_label = $HUD/Label
+@onready var ammo_label = $HUD/AmmoAmount
+@onready var potion_label = $HUD/PotionAmount
 
 var player = null
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c1eiihq8qx83m"
-path="res://.godot/imported/heart.png-9b24f00d5adfc9f1aba2b5add401646d.ctex"
+uid="uid://k4mu1u4a6cw8"
+path="res://.godot/imported/ExplodingEnemy.png-087c0cf73b5c4dc7d2d665576cf9190e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Graphics/UI/heart.png"
-dest_files=["res://.godot/imported/heart.png-9b24f00d5adfc9f1aba2b5add401646d.ctex"]
+source_file="res://Graphics/Characters/Enemies/ExplodingEnemy.png"
+dest_files=["res://.godot/imported/ExplodingEnemy.png-087c0cf73b5c4dc7d2d665576cf9190e.ctex"]
 
 [params]
 

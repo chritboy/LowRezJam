@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://by6shptjmpnl3"]
+[gd_scene load_steps=27 format=3 uid="uid://by6shptjmpnl3"]
 
 [ext_resource type="Script" path="res://Scripts/grunt_enemy.gd" id="1_15vax"]
 [ext_resource type="Texture2D" uid="uid://dstqrplfbf6xb" path="res://Graphics/Characters/Enemies/WalkingGrunts.png" id="1_j536y"]
@@ -265,7 +265,14 @@ _data = {
 "RESET": SubResource("Animation_bfqux")
 }
 
+[sub_resource type="Curve" id="Curve_1kf0a"]
+min_value = -360.0
+max_value = 360.0
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
 [sub_resource type="CurveTexture" id="CurveTexture_efmmq"]
+curve = SubResource("Curve_1kf0a")
 
 [sub_resource type="Curve" id="Curve_hc3bo"]
 _data = [Vector2(0, 0.852632), 0.0, 0.0, 0, 0, Vector2(0.218107, 0.0842105), 0.0, 0.0, 0, 0, Vector2(0.497942, 0), 0.0, 0.0, 0, 0]
