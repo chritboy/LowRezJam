@@ -20,6 +20,7 @@ enum {
 
 @export var exploder = true
 @export var chase_speed = 30
+@export var fly_spawn : PackedScene
 
 var wander_speed = 5
 var acceleration = 150
@@ -27,9 +28,10 @@ var friction = 50
 var current_state = IDLE
 var knockback_power = 50
 var player = null
-
+var enemy_container = null
 
 func _ready():
+	enemy_container = get_tree().get_first_node_in_group("EnemyHolder")
 	player = get_tree().get_first_node_in_group("Player")
 	
 func _physics_process(delta):
@@ -75,7 +77,6 @@ func _physics_process(delta):
 		
 		DEAD:
 			await anim_player.animation_finished
-			$VisibleOnScreenNotifier2D.PROCESS_MODE_INHERIT
 			hitbox.disabled = true
 			$Hurtbox/CollisionShape2D.disabled = true
 			self.set_collision_mask_value(1, false)
@@ -85,7 +86,7 @@ func _physics_process(delta):
 			velocity = Vector2.ZERO
 			anim_player.play("Explode")
 			current_state = DEAD
-			
+					
 	if soft_coll.is_colliding():
 		velocity += soft_coll.get_push_vector() * delta * 200
 		
@@ -131,3 +132,8 @@ func stop_move():
 
 func _on_explode_radius_body_entered(_body):
 	current_state = EXPLODE
+
+func spawn_flies():
+	var fly_inst = fly_spawn.instantiate()
+	fly_inst.global_position = global_position
+	enemy_container.add_child(fly_inst)

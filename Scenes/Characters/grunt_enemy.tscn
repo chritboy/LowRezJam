@@ -344,7 +344,7 @@ shape = SubResource("CircleShape2D_1j2gx")
 [node name="WanderController" parent="." instance=ExtResource("6_wc2al")]
 
 [node name="Stats" parent="." instance=ExtResource("7_l3plf")]
-max_health = 2
+max_health = 3
 
 [node name="PlayerDetection" parent="." instance=ExtResource("8_gyigq")]
 

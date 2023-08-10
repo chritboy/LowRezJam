@@ -1,0 +1,132 @@
+[gd_scene load_steps=12 format=3 uid="uid://dti3yeo5xyp1l"]
+
+[ext_resource type="Script" path="res://Scripts/flies.gd" id="1_3osm4"]
+[ext_resource type="Texture2D" uid="uid://shm0gvr3ptai" path="res://Graphics/Characters/Enemies/flies.png" id="2_j7fac"]
+[ext_resource type="PackedScene" uid="uid://bltrrdetnuw22" path="res://Functional/hurtbox.tscn" id="3_87qj2"]
+[ext_resource type="PackedScene" uid="uid://c7fwctti5sod1" path="res://Functional/hitbox.tscn" id="4_qb1bf"]
+[ext_resource type="PackedScene" uid="uid://cbm8ulw6f5tgi" path="res://Functional/soft_collision.tscn" id="5_xoilg"]
+
+[sub_resource type="Animation" id="Animation_50kmv"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_jdlhy"]
+resource_name = "V1_Walk"
+length = 0.4
+loop_mode = 1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_v5ujy"]
+_data = {
+"RESET": SubResource("Animation_50kmv"),
+"V1_Walk": SubResource("Animation_jdlhy")
+}
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_0hvs8"]
+radius = 0.53629
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_bhysm"]
+radius = 0.412049
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_1j2gx"]
+radius = 5.0
+
+[node name="EnemyFlies" type="CharacterBody2D" groups=["Enemy"]]
+y_sort_enabled = true
+collision_layer = 8
+collision_mask = 77
+motion_mode = 1
+wall_min_slide_angle = 0.0
+script = ExtResource("1_3osm4")
+chase_speed = 35
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+clip_children = 2
+texture = ExtResource("2_j7fac")
+hframes = 8
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_v5ujy")
+}
+
+[node name="Hurtbox" parent="." instance=ExtResource("3_87qj2")]
+visible = false
+position = Vector2(-0.469072, 0.0589924)
+scale = Vector2(0.880001, 1)
+collision_layer = 32
+collision_mask = 2
+
+[node name="CollisionShape2D" parent="Hurtbox" index="0"]
+position = Vector2(0.18711, -0.157319)
+rotation = 1.77042
+shape = SubResource("CircleShape2D_0hvs8")
+
+[node name="Hitbox" parent="." instance=ExtResource("4_qb1bf")]
+visible = false
+position = Vector2(-0.349166, 0.336412)
+scale = Vector2(1.19658, 0.929714)
+collision_layer = 16
+collision_mask = 4
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2(0, -0.5)
+shape = SubResource("CircleShape2D_bhysm")
+
+[node name="SoftCollision" parent="." instance=ExtResource("5_xoilg")]
+visible = false
+
+[node name="CollisionShape2D" parent="SoftCollision" index="0"]
+shape = SubResource("CircleShape2D_1j2gx")
+
+[connection signal="area_entered" from="Hurtbox" to="." method="_on_hurtbox_area_entered"]
+
+[editable path="Hurtbox"]
+[editable path="SoftCollision"]

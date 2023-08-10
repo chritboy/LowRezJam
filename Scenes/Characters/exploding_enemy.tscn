@@ -1,6 +1,7 @@
-[gd_scene load_steps=28 format=3 uid="uid://6y156x7mfdqe"]
+[gd_scene load_steps=29 format=3 uid="uid://6y156x7mfdqe"]
 
 [ext_resource type="Script" path="res://Scripts/grunt_enemy.gd" id="1_77orh"]
+[ext_resource type="PackedScene" uid="uid://dti3yeo5xyp1l" path="res://Scenes/Characters/flies.tscn" id="2_jhkvm"]
 [ext_resource type="Texture2D" uid="uid://c84mowb38e3kc" path="res://Graphics/Characters/Enemies/EnemySheet.png" id="2_qpecf"]
 [ext_resource type="PackedScene" uid="uid://bltrrdetnuw22" path="res://Functional/hurtbox.tscn" id="3_1wel0"]
 [ext_resource type="PackedScene" uid="uid://c7fwctti5sod1" path="res://Functional/hitbox.tscn" id="4_odwmn"]
@@ -100,6 +101,26 @@ tracks/6/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [true]
+}
+tracks/7/type = "method"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath(".")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0.63, 0.64, 0.65),
+"transitions": PackedFloat32Array(1, 1, 1),
+"values": [{
+"args": [],
+"method": &"spawn_flies"
+}, {
+"args": [],
+"method": &"spawn_flies"
+}, {
+"args": [],
+"method": &"spawn_flies"
+}]
 }
 
 [sub_resource type="Animation" id="Animation_50kmv"]
@@ -472,6 +493,7 @@ collision_mask = 0
 motion_mode = 1
 wall_min_slide_angle = 0.0
 script = ExtResource("1_77orh")
+fly_spawn = ExtResource("2_jhkvm")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 clip_children = 2
@@ -557,9 +579,6 @@ collision_layer = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ExplodeRadius"]
 shape = SubResource("CircleShape2D_xjdj6")
-
-[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
-process_mode = 4
 
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_hurtbox_area_entered"]
 [connection signal="timeout" from="WaitTimer" to="." method="_on_wait_timer_timeout"]

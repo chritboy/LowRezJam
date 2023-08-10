@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c1eiihq8qx83m"
-path="res://.godot/imported/Heart.png-716fc83da341534b7c84a4a2952ff464.ctex"
+uid="uid://shm0gvr3ptai"
+path="res://.godot/imported/flies.png-2fa48fb8d772aa0983147fd95e3303b5.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Graphics/UI/Heart.png"
-dest_files=["res://.godot/imported/Heart.png-716fc83da341534b7c84a4a2952ff464.ctex"]
+source_file="res://Graphics/Characters/Enemies/flies.png"
+dest_files=["res://.godot/imported/flies.png-2fa48fb8d772aa0983147fd95e3303b5.ctex"]
 
 [params]
 
