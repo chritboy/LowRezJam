@@ -1,4 +1,4 @@
-[gd_scene load_steps=95 format=3 uid="uid://ep25geblv743"]
+[gd_scene load_steps=97 format=3 uid="uid://ep25geblv743"]
 
 [ext_resource type="Script" path="res://Scripts/player.gd" id="1_3chws"]
 [ext_resource type="Texture2D" uid="uid://ppja5y85d3ad" path="res://Graphics/Characters/Player/Crow_Sheet.png" id="2_ksoyb"]
@@ -1620,7 +1620,7 @@ curve = SubResource("Curve_yhicb")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_jcvk7"]
 emission_shape = 1
-emission_sphere_radius = 15.0
+emission_sphere_radius = 0.01
 particle_flag_disable_z = true
 direction = Vector3(0, 0, 0)
 spread = 180.0
@@ -1631,6 +1631,59 @@ angular_velocity_min = -182.0
 orbit_velocity_min = 0.0
 orbit_velocity_max = 0.0
 scale_curve = SubResource("CurveTexture_e2q3m")
+hue_variation_max = 0.18
+
+[sub_resource type="Animation" id="Animation_2ajx1"]
+resource_name = "Heal"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("HealParticles:emitting")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("HealParticles:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite/ColorRect:color")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0.0352941, 0.596078, 0.415686, 0.588235), Color(1, 1, 1, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sprite/ColorRect:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="Animation" id="Animation_s0buh"]
 resource_name = "Hurt_Blink"
@@ -1686,12 +1739,48 @@ tracks/1/keys = {
 "update": 1,
 "values": [false]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("HealParticles:emitting")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("HealParticles:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_7rqf7"]
 _data = {
+"Heal": SubResource("Animation_2ajx1"),
 "Hurt_Blink": SubResource("Animation_s0buh"),
 "RESET": SubResource("Animation_tlpqe")
 }
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_1810w"]
+emission_shape = 1
+emission_sphere_radius = 10.63
+particle_flag_disable_z = true
+gravity = Vector3(0, -14.15, 0)
+orbit_velocity_min = 0.0
+orbit_velocity_max = 0.0
+color = Color(0, 0.803922, 0.501961, 1)
+hue_variation_min = -0.12
+hue_variation_max = 0.05
 
 [node name="Player" type="CharacterBody2D"]
 z_index = 1
@@ -1781,6 +1870,11 @@ texture = ExtResource("6_r37re")
 libraries = {
 "": SubResource("AnimationLibrary_7rqf7")
 }
+
+[node name="HealParticles" type="GPUParticles2D" parent="."]
+position = Vector2(0, 2)
+emitting = false
+process_material = SubResource("ParticleProcessMaterial_1810w")
 
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_hurtbox_area_entered"]
 [connection signal="area_exited" from="Hurtbox" to="." method="_on_hurtbox_area_exited"]

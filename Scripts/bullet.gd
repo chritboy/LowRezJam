@@ -18,8 +18,6 @@ func _process(delta):
 	elif player.muzzle_pos == -2:
 		global_position.y += speed * delta
 
-
-
 func _on_hurtbox_body_entered(_body):
 	queue_free()
 

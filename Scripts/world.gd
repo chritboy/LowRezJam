@@ -20,6 +20,7 @@ func _ready():
 	
 func _physics_process(_delta):
 	ammo_label.text = str(player.ammo)
+	potion_label.text = str(player.potions)
 
 func player_shoot(bullet, location):
 	var bullet_inst = bullet.instantiate()

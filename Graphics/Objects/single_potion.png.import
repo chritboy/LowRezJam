@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://k4mu1u4a6cw8"
-path="res://.godot/imported/ExplodingEnemy.png-087c0cf73b5c4dc7d2d665576cf9190e.ctex"
+uid="uid://dy5xt7i5epcml"
+path="res://.godot/imported/single_potion.png-dec5db06c2db0e5311b714f6817aa928.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Graphics/Characters/Enemies/ExplodingEnemy.png"
-dest_files=["res://.godot/imported/ExplodingEnemy.png-087c0cf73b5c4dc7d2d665576cf9190e.ctex"]
+source_file="res://Graphics/Objects/single_potion.png"
+dest_files=["res://.godot/imported/single_potion.png-dec5db06c2db0e5311b714f6817aa928.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dstqrplfbf6xb"
-path="res://.godot/imported/WalkingGrunts.png-4614cc9082c6b6b3bb82bf553b77ecb5.ctex"
+uid="uid://c84mowb38e3kc"
+path="res://.godot/imported/EnemySheet.png-e30e9a17fe9f77349900bb0a5511da5e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Graphics/Characters/Enemies/WalkingGrunts.png"
-dest_files=["res://.godot/imported/WalkingGrunts.png-4614cc9082c6b6b3bb82bf553b77ecb5.ctex"]
+source_file="res://Graphics/Characters/Enemies/EnemySheet.png"
+dest_files=["res://.godot/imported/EnemySheet.png-e30e9a17fe9f77349900bb0a5511da5e.ctex"]
 
 [params]
 

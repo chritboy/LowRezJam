@@ -5,7 +5,8 @@ enum {
 	WANDER,
 	CHASE,
 	DEATH,
-	EXPLODE
+	EXPLODE,
+	DEAD
 }
 
 @onready var stats = $Stats
@@ -65,16 +66,25 @@ func _physics_process(delta):
 				current_state = IDLE
 		
 		DEATH:
-			anim_effects.play("Death")
-			$Blood.emitting = true
+			velocity = Vector2.ZERO
+			anim_player.play("Death")
 			hitbox.disabled = true
+			self.set_collision_mask_value(1, false)
+			self.set_collision_layer_value(4, false)
+			current_state = DEAD
+		
+		DEAD:
+			await anim_player.animation_finished
+			$VisibleOnScreenNotifier2D.PROCESS_MODE_INHERIT
+			hitbox.disabled = true
+			$Hurtbox/CollisionShape2D.disabled = true
 			self.set_collision_mask_value(1, false)
 			self.set_collision_layer_value(4, false)
 			
 		EXPLODE:
-			anim_effects.play("Explode")
-			await anim_effects.animation_finished
-			queue_free()
+			velocity = Vector2.ZERO
+			anim_player.play("Explode")
+			current_state = DEAD
 			
 	if soft_coll.is_colliding():
 		velocity += soft_coll.get_push_vector() * delta * 200
@@ -86,13 +96,13 @@ func _on_hurtbox_area_entered(area):
 	stats.health -= area.damage
 	$Blood.emitting = true
 	if stats.health <= 0:
-		current_state = DEATH
+		if exploder == true:
+			current_state = EXPLODE
+		else:
+			current_state = DEATH
 	knockback(area.get_parent().velocity)
 	anim_effects.play("Hurt")
 	hurt_timer.start()
-
-func vanish():
-	queue_free()
 
 func knockback(enemy_velocity):
 	var knockback_dir = (enemy_velocity - velocity).normalized() * knockback_power
@@ -119,5 +129,5 @@ func _on_hurt_timer_timeout():
 func stop_move():
 	velocity = Vector2.ZERO
 
-func _on_explode_radius_body_entered(body):
+func _on_explode_radius_body_entered(_body):
 	current_state = EXPLODE

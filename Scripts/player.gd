@@ -28,6 +28,7 @@ var current_health: int = 3
 @export var dodge_speed: int = 70
 @export var friction: float = 0.15
 @export var acceleration: int = 40
+var potions = 1
 
 var facing = null
 var current_state = MOVE
@@ -56,7 +57,9 @@ func _physics_process(delta):
 				current_state = MELEEATK
 			elif Input.is_action_just_pressed("Dodge"):
 				current_state = DODGE
-	
+			elif Input.is_action_just_pressed("Potion") && current_health < 3 && potions > 0:
+				potion()
+				
 		MELEEATK:
 			anim_state.travel("MeleeATK")
 			melee_attack()
@@ -162,3 +165,9 @@ func muzzle_position():
 		muzzle_pos = 1
 	elif velocity.x < 0:
 		muzzle_pos = -1
+
+func potion():
+	potions -= 1
+	current_health = 3
+	health_change.emit(current_health)
+	anim_effects.play("Heal")
