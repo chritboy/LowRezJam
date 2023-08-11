@@ -5,7 +5,8 @@ enum {
 	MELEEATK,
 	RANGEDATK,
 	DODGE,
-	HURT
+	HURT,
+	DEATH
 }
 
 signal shoot(bullet_scene, location)
@@ -21,25 +22,21 @@ signal health_change
 @onready var bullet = preload("res://Scenes/Characters/bullet.tscn")
 @onready var muzzle = $Muzzle
 @onready var dodge_particles = $DodgeParticles
+@onready var remote_transform = $RemoteTransform2D
 
-@export var max_health:int = 3
-var current_health: int = 3
 @export var speed: int = 50
-@export var dodge_speed: int = 70
+@export var dodge_speed: int = 175
 @export var friction: float = 0.15
 @export var acceleration: int = 40
-var potions = 1
 
 var facing = null
 var current_state = MOVE
 var is_moving = false
-var knockback_power = 60
+var knockback_power = 100
 var invincible = false
 var enemy_collisions = []
 var muzzle_pos = null
-var ammo = 6
 var dodge_vector = Vector2.DOWN
-var is_dodging = false
 
 func _ready():
 	anim_tree.active = true
@@ -57,7 +54,7 @@ func _physics_process(delta):
 				current_state = MELEEATK
 			elif Input.is_action_just_pressed("Dodge"):
 				current_state = DODGE
-			elif Input.is_action_just_pressed("Potion") && current_health < 3 && potions > 0:
+			elif Input.is_action_just_pressed("Potion") && Player.current_health < 3 && Player.potions > 0:
 				potion()
 				
 		MELEEATK:
@@ -65,10 +62,10 @@ func _physics_process(delta):
 			melee_attack()
 		
 		RANGEDATK:
-			if ammo > 0 && Input.is_action_just_pressed("Attack"):
+			if Player.ammo > 0 && Input.is_action_just_pressed("Attack"):
 				anim_state.travel("RangedATK")
 				shoot.emit(bullet, muzzle.global_position)
-				ammo -= 1
+				Player.ammo -= 1
 			if Input.is_action_just_released("Aim"):
 				current_state = MOVE
 		
@@ -78,7 +75,12 @@ func _physics_process(delta):
 			
 		HURT:
 			pass
-	move_and_slide()
+			
+		DEATH:
+			get_tree().paused = true
+			await anim_effects.animation_finished
+			queue_free()
+			Events.emit_signal("player_died")
 	
 	if !invincible:
 		for enemy_area in enemy_collisions:
@@ -101,6 +103,8 @@ func movement():
 		anim_state.travel("Walk")	
 	else:
 		anim_state.travel("Idle")
+	
+	move_and_slide()
 		
 func melee_attack():
 	velocity = Vector2.ZERO
@@ -108,14 +112,14 @@ func melee_attack():
 func attack_finished():
 	self.set_collision_mask_value(4, true)
 	hurtbox.disabled = false
-	is_dodging = false
+	Player.is_dodging = false
 	dodge_particles.emitting = false
 	current_state = MOVE
 	anim_state.travel("Idle")
 
 func dodge():
 	self.set_collision_mask_value(4, false)
-	is_dodging = true
+	Player.is_dodging = true
 	hurtbox.disabled = true
 	velocity = dodge_vector.normalized() * dodge_speed
 	anim_state.travel("Dodge")
@@ -123,17 +127,20 @@ func dodge():
 	move_and_slide()
 
 func hurt_by_enemy(area):
+	knockback(area.get_parent().velocity)
 	hurt_timer.start()
 	anim_state.travel("Hurt")
 	current_state = HURT
 	dodge_particles.emitting = true
-	knockback(area.get_parent().velocity)
 	anim_effects.play("Hurt_Blink")
-	current_health -= 1
-	if current_health <= 0:
-		current_health = max_health
-	invincible = true
-	health_change.emit(current_health)
+	Player.current_health -= 1
+	health_change.emit(Player.current_health)
+	if Player.current_health <= 0:
+		hurtbox.disabled = true
+		anim_effects.play("Death")
+		current_state = DEATH
+	else:
+		invincible = true
 
 func _on_hurtbox_area_entered(area):
 	if area.name == "Hitbox":
@@ -167,7 +174,11 @@ func muzzle_position():
 		muzzle_pos = -1
 
 func potion():
-	potions -= 1
-	current_health = 3
-	health_change.emit(current_health)
+	Player.potions -= 1
+	Player.current_health = 3
+	health_change.emit(Player.current_health)
 	anim_effects.play("Heal")
+
+func connect_camera(camera):
+	var camera_path = camera.get_path()
+	remote_transform.remote_path = camera_path
