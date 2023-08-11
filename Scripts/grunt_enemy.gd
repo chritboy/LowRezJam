@@ -35,10 +35,10 @@ func _ready():
 	player = get_tree().get_first_node_in_group("Player")
 	
 func _physics_process(delta):
-	if player.is_dodging == true:
-		self.set_collision_mask_value(1, false)
+	if Player.is_dodging == true:
+		set_collision_mask_value(1, false)
 	else:
-		self.set_collision_mask_value(1, true)
+		set_collision_mask_value(1, true)
 	match current_state:
 		
 		IDLE:
@@ -65,7 +65,7 @@ func _physics_process(delta):
 				var dir = global_position.direction_to(player.global_position)
 				velocity = velocity.move_toward(dir * chase_speed, acceleration * delta)
 			else:
-				current_state = IDLE
+				state_picker()
 		
 		DEATH:
 			velocity = Vector2.ZERO
