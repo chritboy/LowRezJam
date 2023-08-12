@@ -31,6 +31,7 @@ var player = null
 var enemy_container = null
 
 func _ready():
+	velocity = Vector2.ZERO
 	enemy_container = get_tree().get_first_node_in_group("EnemyHolder")
 	player = get_tree().get_first_node_in_group("Player")
 	
@@ -79,7 +80,8 @@ func _physics_process(delta):
 		DEAD:
 			await anim_player.animation_finished
 			hitbox.disabled = true
-			$Hurtbox/CollisionShape2D.disabled = true
+			if exploder == true:
+				$Hurtbox/CollisionShape2D.disabled = true
 			self.set_collision_mask_value(1, false)
 			self.set_collision_layer_value(4, false)
 			
@@ -98,14 +100,15 @@ func _on_hurtbox_area_entered(area):
 	stats.health -= area.damage
 	SoundPlayer.play_enemy_hurt()
 	$Blood.emitting = true
-	if stats.health <= 0:
+	if stats.health <= 0 && current_state != DEAD:
 		if exploder == true:
 			SoundPlayer.play_enemy_explosion()
 			current_state = EXPLODE
 		else:
 			current_state = DEATH
 	knockback(area.get_parent().velocity)
-	anim_effects.play("Hurt")
+	if current_state != DEAD:
+		anim_effects.play("Hurt")
 	hurt_timer.start()
 
 func knockback(enemy_velocity):

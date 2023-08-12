@@ -13027,6 +13027,11 @@ layer_0/tile_data = PackedInt32Array(1638408, 851968, 33, 1703944, 851968, 34, 1
 [node name="Player" parent="." instance=ExtResource("3_xruyo")]
 position = Vector2(32, 186)
 
+[node name="Camera2D" type="Camera2D" parent="."]
+limit_smoothed = true
+position_smoothing_enabled = true
+rotation_smoothing_enabled = true
+
 [node name="Bullets" type="Node" parent="."]
 
 [node name="HUD" parent="." instance=ExtResource("5_ebrfr")]
@@ -13091,14 +13096,5 @@ collision_layer = 0
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CrowHubDoor"]
 position = Vector2(12, 6.5)
 shape = SubResource("RectangleShape2D_w5gcd")
-
-[node name="Camera2D" type="Camera2D" parent="."]
-process_callback = 0
-limit_left = -200
-limit_top = -57
-limit_right = 416
-limit_bottom = 288
-position_smoothing_speed = 10.0
-rotation_smoothing_enabled = true
 
 [connection signal="body_entered" from="CrowHubDoor" to="." method="_on_crow_hub_door_body_entered"]

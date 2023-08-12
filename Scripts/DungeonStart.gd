@@ -14,6 +14,7 @@ func _ready():
 	player = get_tree().get_first_node_in_group("Player")
 	player.connect_camera(camera)
 	player.shoot.connect(player_shoot)
+	StageManager.emit_signal("level_loaded")
 
 func player_shoot(bullet, location):
 	var bullet_inst = bullet.instantiate()
@@ -22,3 +23,4 @@ func player_shoot(bullet, location):
 
 func _on_crow_hub_door_body_entered(_body):
 	StageManager.change_stage(StageManager.CrowHub, 75, 150)
+

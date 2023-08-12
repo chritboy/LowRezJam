@@ -15,6 +15,7 @@ func _ready():
 	player.connect_camera(camera)
 	player.shoot.connect(player_shoot)
 	SoundPlayer.play_hub()
+	StageManager.emit_signal("level_loaded")
 
 func player_shoot(bullet, location):
 	var bullet_inst = bullet.instantiate()

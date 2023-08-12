@@ -47,6 +47,9 @@ func _physics_process(delta):
 	anim_tree.advance(delta * anim.speed_scale)
 	muzzle_position()
 	ranged_atk()
+	if Player.current_health <= 0:
+		anim_effects.play("Death")
+		current_state = DEATH
 	match current_state:
 		MOVE:
 			movement()
@@ -80,6 +83,8 @@ func _physics_process(delta):
 			
 		DEATH:
 			SoundPlayer.play_player_death()
+			SoundPlayer.stop_music()
+			hurtbox.disabled = true
 			get_tree().paused = true
 			await anim_effects.animation_finished
 			queue_free()
@@ -130,22 +135,18 @@ func dodge():
 	move_and_slide()
 
 func hurt_by_enemy(area):
+	invincible = true
 	SoundPlayer.play_player_hurt()
+	Player.current_health -= 1
+	health_change.emit(Player.current_health)
 	knockback(area.get_parent().velocity)
 	hurt_timer.start()
 	anim_state.travel("Hurt")
 	current_state = HURT
 	dodge_particles.emitting = true
 	anim_effects.play("Hurt_Blink")
-	Player.current_health -= 1
-	health_change.emit(Player.current_health)
-	if Player.current_health <= 0:
-		SoundPlayer.stop_music()
-		hurtbox.disabled = true
-		anim_effects.play("Death")
-		current_state = DEATH
-	else:
-		invincible = true
+
+		
 
 func _on_hurtbox_area_entered(area):
 	if area.name == "Hitbox":
@@ -179,11 +180,13 @@ func muzzle_position():
 		muzzle_pos = -1
 
 func potion():
+	hurt_timer.start()
+	invincible = true
+	anim_effects.play("Heal")
+	SoundPlayer.play_player_heal()
 	Player.potions -= 1
 	Player.current_health = 3
 	health_change.emit(Player.current_health)
-	anim_effects.play("Heal")
-	SoundPlayer.play_player_heal()
 
 func connect_camera(camera):
 	var camera_path = camera.get_path()
