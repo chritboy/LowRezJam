@@ -1,7 +1,6 @@
 extends CanvasLayer
 
-const MainHall = preload("res://Scenes/Screens/MainHall.tscn")
-const WestHall = preload("res://Scenes/Screens/WestHall.tscn")
+const DungeonStart = preload("res://Scenes/Screens/DungeonStart.tscn")
 
 
 func _ready():

@@ -303,6 +303,7 @@ offset_bottom = 6.0
 color = Color(0.784314, 0, 0.0823529, 0)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2(-0.491077, -0.0701561)
 shape = SubResource("CapsuleShape2D_7d65g")
 
@@ -322,6 +323,7 @@ collision_mask = 2
 shape = SubResource("CapsuleShape2D_shs8d")
 
 [node name="Hitbox" parent="." instance=ExtResource("4_0qkcy")]
+visible = false
 position = Vector2(-0.471935, 0.353951)
 scale = Vector2(1.19658, 0.929714)
 collision_layer = 16

@@ -19,7 +19,7 @@ func _physics_process(_delta):
 
 func on_player_died():
 	if Player.checkpoint == 1:
-		StageManager.change_stage(StageManager.MainHall, 32, 170)
+		StageManager.change_stage(StageManager.DungeonStart, 32, 190)
 		get_tree().reload_current_scene()
 		player = get_tree().get_first_node_in_group("Player")
 		Player.current_health = Player.max_health

@@ -71,6 +71,7 @@ func _physics_process(delta):
 			velocity = Vector2.ZERO
 			anim_player.play("Death")
 			hitbox.disabled = true
+			$SoftCollision/CollisionShape2D.disabled = true
 			self.set_collision_mask_value(1, false)
 			self.set_collision_layer_value(4, false)
 			current_state = DEAD
