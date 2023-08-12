@@ -1,0 +1,39 @@
+[gd_scene load_steps=9 format=3 uid="uid://dqgjs2njhogdv"]
+
+[ext_resource type="Script" path="res://Scripts/sound_player.gd" id="1_uoiq2"]
+[ext_resource type="AudioStream" uid="uid://bbef23suxqlum" path="res://Sound/Circular.mp3" id="2_lsdyx"]
+[ext_resource type="AudioStream" uid="uid://hb0tw3jkr2n6" path="res://Sound/PlayerShoot.mp3" id="3_fv0f5"]
+[ext_resource type="AudioStream" uid="uid://k7pcdg61v266" path="res://Sound/PlayerSword.mp3" id="4_lmsxc"]
+[ext_resource type="AudioStream" uid="uid://ibpmne24povy" path="res://Sound/PlayerHurt.mp3" id="5_80xil"]
+[ext_resource type="AudioStream" uid="uid://dxfdry0tnq1ul" path="res://Sound/PlayerHeal.mp3" id="6_huhn2"]
+[ext_resource type="AudioStream" uid="uid://bdk2psoopaapn" path="res://Sound/PlayerDeath.mp3" id="8_dgaxn"]
+[ext_resource type="AudioStream" uid="uid://cuyqog4nqyy0b" path="res://Sound/EnemyExplosion.mp3" id="8_gytyt"]
+
+[node name="SoundPlayer" type="Node"]
+process_mode = 3
+script = ExtResource("1_uoiq2")
+
+[node name="HubMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_lsdyx")
+volume_db = -10.0
+
+[node name="PlayerShoot" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_fv0f5")
+
+[node name="PlayerSword" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_lmsxc")
+
+[node name="EnemyHurt" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_80xil")
+
+[node name="PlayerHurt" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_80xil")
+
+[node name="PlayerHeal" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_huhn2")
+
+[node name="PlayerDeath" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("8_dgaxn")
+
+[node name="EnemyExplosion" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_gytyt")

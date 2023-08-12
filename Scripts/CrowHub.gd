@@ -14,6 +14,7 @@ func _ready():
 	player = get_tree().get_first_node_in_group("Player")
 	player.connect_camera(camera)
 	player.shoot.connect(player_shoot)
+	SoundPlayer.play_hub()
 
 func player_shoot(bullet, location):
 	var bullet_inst = bullet.instantiate()

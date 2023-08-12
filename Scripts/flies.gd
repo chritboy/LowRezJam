@@ -39,6 +39,7 @@ func _physics_process(delta):
 	move_and_slide()
 
 func _on_hurtbox_area_entered(_area):
+	SoundPlayer.play_enemy_hurt()
 	queue_free()
 
 func knockback(enemy_velocity):

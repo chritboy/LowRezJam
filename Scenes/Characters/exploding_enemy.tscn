@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://6y156x7mfdqe"]
+[gd_scene load_steps=30 format=3 uid="uid://6y156x7mfdqe"]
 
 [ext_resource type="Script" path="res://Scripts/grunt_enemy.gd" id="1_77orh"]
 [ext_resource type="PackedScene" uid="uid://dti3yeo5xyp1l" path="res://Scenes/Characters/flies.tscn" id="2_jhkvm"]
@@ -318,6 +318,9 @@ height = 6.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_1j2gx"]
 radius = 5.0
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_yfug3"]
+radius = 33.0
+
 [sub_resource type="Animation" id="Animation_21hum"]
 resource_name = "Hurt"
 length = 0.3
@@ -558,6 +561,7 @@ max_health = 2
 
 [node name="CollisionShape2D" parent="PlayerDetection" index="0"]
 modulate = Color(1, 1, 1, 0.196078)
+shape = SubResource("CircleShape2D_yfug3")
 
 [node name="Effects" type="AnimationPlayer" parent="."]
 libraries = {

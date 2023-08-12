@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://bc1xue7jvgvfu"]
+[gd_scene load_steps=13 format=3 uid="uid://bc1xue7jvgvfu"]
 
 [ext_resource type="Script" path="res://Scripts/DungeonStart.gd" id="1_fgqq6"]
 [ext_resource type="Texture2D" uid="uid://c2doweloc6654" path="res://Graphics/Tiles/Asset_Page_condensed.png" id="2_e5kjd"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://ep25geblv743" path="res://Scenes/Characters/player.tscn" id="3_xruyo"]
 [ext_resource type="PackedScene" uid="uid://dlm6cv8lf4x3g" path="res://Scenes/UI/hud.tscn" id="5_ebrfr"]
 [ext_resource type="PackedScene" uid="uid://by6shptjmpnl3" path="res://Scenes/Characters/grunt_enemy.tscn" id="6_c1eri"]
+[ext_resource type="PackedScene" uid="uid://6y156x7mfdqe" path="res://Scenes/Characters/exploding_enemy.tscn" id="7_04jqo"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_mdcce"]
 texture = ExtResource("2_mx1y1")
@@ -13039,11 +13040,11 @@ process_mode = 3
 [node name="Enemies" type="Node" parent="." groups=["EnemyHolder"]]
 
 [node name="EnemyGrunt4" parent="Enemies" instance=ExtResource("6_c1eri")]
-position = Vector2(53, 34)
+position = Vector2(48, 41)
 exploder = false
 
 [node name="EnemyGrunt3" parent="Enemies" instance=ExtResource("6_c1eri")]
-position = Vector2(0, 40)
+position = Vector2(12, 40)
 exploder = false
 
 [node name="EnemyGrunt7" parent="Enemies" instance=ExtResource("6_c1eri")]
@@ -13063,24 +13064,30 @@ position = Vector2(-21, 2)
 exploder = false
 
 [node name="EnemyGrunt12" parent="Enemies" instance=ExtResource("6_c1eri")]
-position = Vector2(-29, 14)
+position = Vector2(-30, 29)
 exploder = false
 
 [node name="EnemyGrunt13" parent="Enemies" instance=ExtResource("6_c1eri")]
-position = Vector2(-44, -6)
+position = Vector2(-32, 11)
 exploder = false
 
 [node name="EnemyGrunt14" parent="Enemies" instance=ExtResource("6_c1eri")]
-position = Vector2(50, -4)
+position = Vector2(61, 24)
 exploder = false
 
 [node name="EnemyGrunt15" parent="Enemies" instance=ExtResource("6_c1eri")]
-position = Vector2(-41, 41)
+position = Vector2(-2, 32)
 exploder = false
 
 [node name="EnemyGrunt10" parent="Enemies" instance=ExtResource("6_c1eri")]
-position = Vector2(35, 11)
+position = Vector2(31, 25)
 exploder = false
+
+[node name="EnemyGrunt" parent="Enemies" instance=ExtResource("7_04jqo")]
+position = Vector2(56, -14)
+
+[node name="EnemyGrunt2" parent="Enemies" instance=ExtResource("7_04jqo")]
+position = Vector2(-64, -16)
 
 [node name="CrowHubDoor" type="Area2D" parent="."]
 position = Vector2(20, 198)

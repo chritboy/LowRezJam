@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://by6shptjmpnl3"]
+[gd_scene load_steps=28 format=3 uid="uid://by6shptjmpnl3"]
 
 [ext_resource type="Script" path="res://Scripts/grunt_enemy.gd" id="1_15vax"]
 [ext_resource type="Texture2D" uid="uid://c84mowb38e3kc" path="res://Graphics/Characters/Enemies/EnemySheet.png" id="2_pdo7s"]
@@ -174,6 +174,9 @@ height = 9.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_1j2gx"]
 radius = 5.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_pmrsj"]
+radius = 29.0
 
 [sub_resource type="Curve" id="Curve_1kf0a"]
 min_value = -360.0
@@ -352,6 +355,7 @@ max_health = 3
 
 [node name="CollisionShape2D" parent="PlayerDetection" index="0"]
 modulate = Color(1, 1, 1, 0.196078)
+shape = SubResource("CircleShape2D_pmrsj")
 
 [node name="HurtTimer" type="Timer" parent="."]
 wait_time = 0.5

@@ -1,16 +1,33 @@
-[gd_scene load_steps=100 format=3 uid="uid://ep25geblv743"]
+[gd_scene load_steps=101 format=3 uid="uid://ep25geblv743"]
 
 [ext_resource type="Script" path="res://Scripts/player.gd" id="1_3chws"]
 [ext_resource type="Texture2D" uid="uid://ppja5y85d3ad" path="res://Graphics/Characters/Player/Crow_Sheet.png" id="2_ksoyb"]
 [ext_resource type="PackedScene" uid="uid://c7fwctti5sod1" path="res://Functional/hitbox.tscn" id="3_ltndf"]
 [ext_resource type="Script" path="res://Scripts/hitbox.gd" id="4_hdjtt"]
 [ext_resource type="PackedScene" uid="uid://bltrrdetnuw22" path="res://Functional/hurtbox.tscn" id="5_n3nx2"]
+[ext_resource type="Texture2D" uid="uid://4isu7xpm6r5n" path="res://Graphics/UI/gun.png" id="6_iaqfk"]
 [ext_resource type="Texture2D" uid="uid://cypp4l4ggvgen" path="res://Graphics/Characters/Player/Particle.png" id="6_r37re"]
 [ext_resource type="Texture2D" uid="uid://b45c5w4x0bas3" path="res://Graphics/Characters/Player/Crow_Death_Sheet.png" id="7_wf8b0"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_c0ux4"]
 radius = 2.0
 height = 6.0
+
+[sub_resource type="Animation" id="Animation_qc265"]
+resource_name = "Death"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 1.7, 1.8, 1.9, 2, 2.1, 2.2, 2.3, 2.4, 2.5, 2.6, 2.7, 2.8, 2.9, 3),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 124, 125, 126, 127, 128, 129, 130]
+}
 
 [sub_resource type="Animation" id="Animation_tm1k2"]
 resource_name = "DodgeDown"
@@ -1374,22 +1391,6 @@ tracks/2/keys = {
 "values": [Vector2(0, -4)]
 }
 
-[sub_resource type="Animation" id="Animation_qc265"]
-resource_name = "Death"
-length = 3.0
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 1.7, 1.8, 1.9, 2, 2.1, 2.2, 2.3, 2.4, 2.5, 2.6, 2.7, 2.8, 2.9, 3),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 124, 125, 126, 127, 128, 129, 130]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_dpy8w"]
 _data = {
 "Death": SubResource("Animation_qc265"),
@@ -1619,7 +1620,7 @@ states/RangedATK/position = Vector2(446, 19)
 states/Walk/node = SubResource("AnimationNodeBlendSpace2D_m73k3")
 states/Walk/position = Vector2(532, 100)
 transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_v41lu"), "Idle", "Walk", SubResource("AnimationNodeStateMachineTransition_ddgqp"), "Walk", "Idle", SubResource("AnimationNodeStateMachineTransition_m1k1x"), "Idle", "MeleeATK", SubResource("AnimationNodeStateMachineTransition_q125k"), "Walk", "MeleeATK", SubResource("AnimationNodeStateMachineTransition_m86i4"), "MeleeATK", "Idle", SubResource("AnimationNodeStateMachineTransition_efj57"), "MeleeATK", "Walk", SubResource("AnimationNodeStateMachineTransition_two14"), "RangedATK", "Idle", SubResource("AnimationNodeStateMachineTransition_dgr2f"), "Idle", "RangedATK", SubResource("AnimationNodeStateMachineTransition_acuhi"), "RangedATK", "Walk", SubResource("AnimationNodeStateMachineTransition_r55f6"), "Walk", "RangedATK", SubResource("AnimationNodeStateMachineTransition_jtq7o"), "Walk", "Dodge", SubResource("AnimationNodeStateMachineTransition_k3l2a"), "Dodge", "Walk", SubResource("AnimationNodeStateMachineTransition_c3kly"), "Dodge", "Idle", SubResource("AnimationNodeStateMachineTransition_5ndw5"), "Hurt", "Walk", SubResource("AnimationNodeStateMachineTransition_m3j8y"), "Hurt", "MeleeATK", SubResource("AnimationNodeStateMachineTransition_wdcy0"), "Hurt", "RangedATK", SubResource("AnimationNodeStateMachineTransition_6j6ap"), "Hurt", "Idle", SubResource("AnimationNodeStateMachineTransition_n51c6"), "MeleeATK", "Hurt", SubResource("AnimationNodeStateMachineTransition_o070v"), "Walk", "Hurt", SubResource("AnimationNodeStateMachineTransition_ovi7t"), "RangedATK", "Hurt", SubResource("AnimationNodeStateMachineTransition_o5rbi"), "Idle", "Hurt", SubResource("AnimationNodeStateMachineTransition_f7hur")]
-graph_offset = Vector2(-6, -73)
+graph_offset = Vector2(-7, -26)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vpir2"]
 size = Vector2(5, 10)
@@ -1650,6 +1651,46 @@ orbit_velocity_min = 0.0
 orbit_velocity_max = 0.0
 scale_curve = SubResource("CurveTexture_e2q3m")
 hue_variation_max = 0.18
+
+[sub_resource type="Animation" id="Animation_klxew"]
+resource_name = "Death"
+length = 3.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("DeathSprite:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 3.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("DeathSprite:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 1.7, 1.8, 1.9, 2, 2.1, 2.2, 2.3, 2.4, 2.5, 2.6, 2.7, 2.8, 2.9, 3),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30]
+}
 
 [sub_resource type="Animation" id="Animation_2ajx1"]
 resource_name = "Heal"
@@ -1818,46 +1859,6 @@ tracks/6/keys = {
 "values": [0]
 }
 
-[sub_resource type="Animation" id="Animation_klxew"]
-resource_name = "Death"
-length = 3.1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite:visible")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("DeathSprite:visible")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 3.1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [true, false]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("DeathSprite:frame")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 1.7, 1.8, 1.9, 2, 2.1, 2.2, 2.3, 2.4, 2.5, 2.6, 2.7, 2.8, 2.9, 3),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_7rqf7"]
 _data = {
 "Death": SubResource("Animation_klxew"),
@@ -1917,7 +1918,7 @@ anim_player = NodePath("../AnimationPlayer")
 process_callback = 2
 parameters/Dodge/blend_position = Vector2(0, 0)
 parameters/Hurt/blend_position = Vector2(-0.326513, 0.403141)
-parameters/Idle/blend_position = Vector2(-0.00255752, -0.368421)
+parameters/Idle/blend_position = Vector2(-0.00101316, -0.54491)
 parameters/MeleeATK/blend_position = Vector2(0.0878091, -0.182156)
 parameters/RangedATK/blend_position = Vector2(-0.00255752, 0.97654)
 parameters/Walk/blend_position = Vector2(-0.955669, -0.537118)
@@ -1947,6 +1948,10 @@ one_shot = true
 
 [node name="Muzzle" type="Marker2D" parent="."]
 position = Vector2(0, 4)
+
+[node name="Sprite2D" type="Sprite2D" parent="Muzzle"]
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("6_iaqfk")
 
 [node name="DodgeParticles" type="GPUParticles2D" parent="."]
 z_index = 1

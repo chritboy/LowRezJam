@@ -26,7 +26,7 @@ var wander_speed = 5
 var acceleration = 150
 var friction = 50
 var current_state = IDLE
-var knockback_power = 50
+var knockback_power = 70
 var player = null
 var enemy_container = null
 
@@ -96,9 +96,11 @@ func _physics_process(delta):
 
 func _on_hurtbox_area_entered(area):
 	stats.health -= area.damage
+	SoundPlayer.play_enemy_hurt()
 	$Blood.emitting = true
 	if stats.health <= 0:
 		if exploder == true:
+			SoundPlayer.play_enemy_explosion()
 			current_state = EXPLODE
 		else:
 			current_state = DEATH
@@ -132,6 +134,7 @@ func stop_move():
 	velocity = Vector2.ZERO
 
 func _on_explode_radius_body_entered(_body):
+	SoundPlayer.play_enemy_explosion()
 	current_state = EXPLODE
 
 func spawn_flies():

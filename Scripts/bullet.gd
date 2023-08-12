@@ -5,7 +5,6 @@ extends Area2D
 var velocity 
 
 func _ready():
-	velocity = Vector2.ZERO
 	player = get_tree().get_first_node_in_group("Player")
 	
 func _process(delta):
@@ -17,6 +16,8 @@ func _process(delta):
 		global_position.y += -speed * delta
 	elif player.muzzle_pos == -2:
 		global_position.y += speed * delta
+	else:
+		global_position.y -= speed * delta
 
 func _on_hurtbox_body_entered(_body):
 	queue_free()

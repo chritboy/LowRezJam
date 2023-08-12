@@ -36,7 +36,7 @@ var knockback_power = 100
 var invincible = false
 var enemy_collisions = []
 var muzzle_pos = null
-var dodge_vector = Vector2.DOWN
+var dodge_vector = Vector2.UP
 
 func _ready():
 	anim_tree.active = true
@@ -51,6 +51,7 @@ func _physics_process(delta):
 		MOVE:
 			movement()
 			if Input.is_action_just_pressed("Attack"):
+				SoundPlayer.play_sword()
 				current_state = MELEEATK
 			elif Input.is_action_just_pressed("Dodge"):
 				current_state = DODGE
@@ -64,6 +65,7 @@ func _physics_process(delta):
 		RANGEDATK:
 			if Player.ammo > 0 && Input.is_action_just_pressed("Attack"):
 				anim_state.travel("RangedATK")
+				SoundPlayer.play_shoot()
 				shoot.emit(bullet, muzzle.global_position)
 				Player.ammo -= 1
 			if Input.is_action_just_released("Aim"):
@@ -77,6 +79,7 @@ func _physics_process(delta):
 			pass
 			
 		DEATH:
+			SoundPlayer.play_player_death()
 			get_tree().paused = true
 			await anim_effects.animation_finished
 			queue_free()
@@ -127,6 +130,7 @@ func dodge():
 	move_and_slide()
 
 func hurt_by_enemy(area):
+	SoundPlayer.play_player_hurt()
 	knockback(area.get_parent().velocity)
 	hurt_timer.start()
 	anim_state.travel("Hurt")
@@ -136,6 +140,7 @@ func hurt_by_enemy(area):
 	Player.current_health -= 1
 	health_change.emit(Player.current_health)
 	if Player.current_health <= 0:
+		SoundPlayer.stop_music()
 		hurtbox.disabled = true
 		anim_effects.play("Death")
 		current_state = DEATH
@@ -178,6 +183,7 @@ func potion():
 	Player.current_health = 3
 	health_change.emit(Player.current_health)
 	anim_effects.play("Heal")
+	SoundPlayer.play_player_heal()
 
 func connect_camera(camera):
 	var camera_path = camera.get_path()

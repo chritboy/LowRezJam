@@ -20,6 +20,7 @@ config/icon="res://icon.svg"
 Events="*res://Scripts/events.gd"
 Player="*res://Scripts/player_trackables.gd"
 StageManager="*res://Functional/stage_manager.tscn"
+SoundPlayer="*res://Functional/sound_player.tscn"
 
 [display]
 
