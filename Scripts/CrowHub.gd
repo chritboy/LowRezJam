@@ -20,5 +20,5 @@ func player_shoot(bullet, location):
 	bullet_inst.global_position = location
 	bullet_container.add_child(bullet_inst)
 
-func _on_west_hall_body_entered(_body):
-	pass
+func _on_dungeon_entrance_body_entered(_body):
+	StageManager.change_stage(StageManager.DungeonStart, 32, 189)

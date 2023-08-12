@@ -1,6 +1,7 @@
 extends CanvasLayer
 
 const DungeonStart = preload("res://Scenes/Screens/DungeonStart.tscn")
+const CrowHub = preload("res://Scenes/Screens/CrowHub.tscn")
 
 
 func _ready():

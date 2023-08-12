@@ -19,6 +19,3 @@ func player_shoot(bullet, location):
 	var bullet_inst = bullet.instantiate()
 	bullet_inst.global_position = location
 	bullet_container.add_child(bullet_inst)
-
-func _on_west_hall_body_entered(_body):
-	pass
