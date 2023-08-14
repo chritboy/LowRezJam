@@ -2,17 +2,16 @@ extends Sprite2D
 
 var player = null
 
-func _ready():
-	player = get_tree().get_first_node_in_group("Player")
 	
 func _on_area_2d_body_entered(_body):
-	if player.potions == 12:
+	if Player.potions == 12:
 		pass
 	else:
 		$AnimationPlayer.play("Pickup")
-		player.ammo += randi_range(3, 4)
-		if player.ammo > 12:
-			player.ammo = 12
+		SoundPlayer.play_item_grab()
+		Player.ammo += randi_range(3, 4)
+		if Player.ammo > 12:
+			Player.ammo = 12
 		vanish()
 
 func vanish():

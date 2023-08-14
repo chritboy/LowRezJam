@@ -58,7 +58,8 @@ func _physics_process(delta):
 				current_state = MELEEATK
 			elif Input.is_action_just_pressed("Dodge"):
 				current_state = DODGE
-			elif Input.is_action_just_pressed("Potion") && Player.current_health < 3 && Player.potions > 0:
+				SoundPlayer.play_dodge()
+			elif Input.is_action_just_pressed("Potion") && Player.current_health < 5 && Player.potions > 0:
 				potion()
 				
 		MELEEATK:
@@ -71,6 +72,8 @@ func _physics_process(delta):
 				SoundPlayer.play_shoot()
 				shoot.emit(bullet, muzzle.global_position)
 				Player.ammo -= 1
+			else:
+				pass
 			if Input.is_action_just_released("Aim"):
 				current_state = MOVE
 		
@@ -82,8 +85,10 @@ func _physics_process(delta):
 			pass
 			
 		DEATH:
+			Player.saved_ammo = Player.ammo
+			Player.saved_potions = Player.potions
 			SoundPlayer.play_player_death()
-			SoundPlayer.stop_music()
+			SoundPlayer.hub_music.stop()
 			hurtbox.disabled = true
 			get_tree().paused = true
 			await anim_effects.animation_finished
@@ -136,6 +141,7 @@ func dodge():
 
 func hurt_by_enemy(area):
 	invincible = true
+	self.set_collision_mask_value(4, false)
 	SoundPlayer.play_player_hurt()
 	Player.current_health -= 1
 	health_change.emit(Player.current_health)
@@ -144,9 +150,7 @@ func hurt_by_enemy(area):
 	anim_state.travel("Hurt")
 	current_state = HURT
 	dodge_particles.emitting = true
-	anim_effects.play("Hurt_Blink")
-
-		
+	anim_effects.play("Hurt_Blink")		
 
 func _on_hurtbox_area_entered(area):
 	if area.name == "Hitbox":
@@ -158,6 +162,7 @@ func knockback(enemy_velocity):
 	move_and_slide()
 
 func _on_hurt_timer_timeout():
+	self.set_collision_mask_value(4, true)
 	invincible = false
 
 func _on_hurtbox_area_exited(area):
@@ -185,7 +190,7 @@ func potion():
 	anim_effects.play("Heal")
 	SoundPlayer.play_player_heal()
 	Player.potions -= 1
-	Player.current_health = 3
+	Player.current_health = Player.max_health
 	health_change.emit(Player.current_health)
 
 func connect_camera(camera):

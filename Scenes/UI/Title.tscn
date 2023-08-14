@@ -2,19 +2,17 @@
 
 [ext_resource type="FontFile" uid="uid://bygwwji57plty" path="res://Graphics/UI/m3x6.ttf" id="1_4e1f7"]
 [ext_resource type="Script" path="res://Scripts/Title.gd" id="1_fwfd1"]
+[ext_resource type="Texture2D" uid="uid://b5r3p2cy61ujf" path="res://Graphics/Characters/Player/Crow_with_Egg.png" id="3_ayj6y"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_161au"]
 font = ExtResource("1_4e1f7")
-font_size = 32
+font_size = 31
 
 [sub_resource type="Theme" id="Theme_bluid"]
 default_font = ExtResource("1_4e1f7")
-default_font_size = 32
+default_font_size = 65
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_esmt2"]
-bg_color = Color(0, 0, 0, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_eerfq"]
 bg_color = Color(0, 0, 0, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ewgbg"]
@@ -29,40 +27,43 @@ offset_bottom = 64.0
 color = Color(0, 0.188235, 0.231373, 1)
 
 [node name="Title" type="Label" parent="."]
-offset_top = 6.0
-offset_right = 103.0
-offset_bottom = 35.0
+offset_left = 2.0
+offset_top = 3.0
+offset_right = 76.0
+offset_bottom = 31.0
 scale = Vector2(0.622713, 0.581183)
-text = "Fancy Title"
+text = "Celestial "
+label_settings = SubResource("LabelSettings_161au")
+horizontal_alignment = 1
+
+[node name="Title2" type="Label" parent="."]
+offset_left = 27.0
+offset_top = 13.0
+offset_right = 101.0
+offset_bottom = 41.0
+scale = Vector2(0.622713, 0.581183)
+text = "Burial"
 label_settings = SubResource("LabelSettings_161au")
 horizontal_alignment = 1
 
 [node name="Start" type="Button" parent="."]
-offset_top = 27.0
-offset_right = 229.0
-offset_bottom = 61.0
+offset_left = 3.0
+offset_top = 45.0
+offset_right = 91.0
+offset_bottom = 106.0
 scale = Vector2(0.28, 0.28)
 focus_mode = 0
 theme = SubResource("Theme_bluid")
 theme_override_colors/font_hover_color = Color(0.839216, 0, 0, 1)
+theme_override_font_sizes/font_size = 0
 theme_override_styles/hover = SubResource("StyleBoxFlat_esmt2")
 text = "Start"
 
-[node name="Controls" type="Button" parent="."]
-offset_top = 39.0
-offset_right = 229.0
-offset_bottom = 73.0
-scale = Vector2(0.28, 0.28)
-focus_mode = 0
-theme = SubResource("Theme_bluid")
-theme_override_colors/font_hover_color = Color(0.839216, 0, 0, 1)
-theme_override_styles/hover = SubResource("StyleBoxFlat_eerfq")
-text = "Controls"
-
 [node name="Quit" type="Button" parent="."]
-offset_top = 51.0
-offset_right = 229.0
-offset_bottom = 85.0
+offset_left = 43.0
+offset_top = 45.0
+offset_right = 107.0
+offset_bottom = 106.0
 scale = Vector2(0.28, 0.28)
 focus_mode = 0
 theme = SubResource("Theme_bluid")
@@ -70,6 +71,9 @@ theme_override_colors/font_hover_color = Color(0.839216, 0, 0, 1)
 theme_override_styles/hover = SubResource("StyleBoxFlat_ewgbg")
 text = "Quit"
 
+[node name="CrowWithEgg" type="Sprite2D" parent="."]
+position = Vector2(30, 22)
+texture = ExtResource("3_ayj6y")
+
 [connection signal="button_up" from="Start" to="." method="_on_start_button_up"]
-[connection signal="button_up" from="Controls" to="." method="_on_controls_button_up"]
 [connection signal="button_up" from="Quit" to="." method="_on_quit_button_up"]

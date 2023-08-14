@@ -1,23 +1,23 @@
 [gd_scene load_steps=8 format=3 uid="uid://dnmpwkt1x1pqm"]
 
-[ext_resource type="Texture2D" uid="uid://4isu7xpm6r5n" path="res://Graphics/UI/gun.png" id="1_kce31"]
+[ext_resource type="Texture2D" uid="uid://cqwacf67vs5t2" path="res://Graphics/Characters/Player/Bullet.png" id="1_5fnp4"]
 [ext_resource type="Script" path="res://Scripts/ammo_drop.gd" id="2_qpqn0"]
 
 [sub_resource type="Animation" id="Animation_1gtfm"]
 resource_name = "Float"
-length = 2.0
+length = 0.8
 loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath(".:scale")
+tracks/0/path = NodePath(".:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(0.25, 0.25), Vector2(0.26, 0.26)]
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
 }
 
 [sub_resource type="Animation" id="Animation_yxo0q"]
@@ -53,38 +53,14 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath(".:scale")
+tracks/0/path = NodePath(".:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(0.2, 0.2)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:rotation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.0]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath(".:modulate")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 1)]
+"update": 1,
+"values": [0]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_l36bc"]
@@ -95,11 +71,14 @@ _data = {
 }
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_wlgao"]
-radius = 6.77851
+radius = 0.677852
 
 [node name="Ammo" type="Sprite2D"]
-scale = Vector2(0.2, 0.2)
-texture = ExtResource("1_kce31")
+modulate = Color(1, 1, 1, 0.428571)
+rotation = 3.59039
+scale = Vector2(1.2, 1.2)
+texture = ExtResource("1_5fnp4")
+hframes = 4
 script = ExtResource("2_qpqn0")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -112,7 +91,7 @@ libraries = {
 collision_layer = 64
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(-3.33333, 0)
+position = Vector2(7.15256e-07, 0)
 scale = Vector2(-1.47525, 1.56981)
 shape = SubResource("CircleShape2D_wlgao")
 

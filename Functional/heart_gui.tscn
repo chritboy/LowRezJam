@@ -11,7 +11,7 @@ script = ExtResource("1_pmwtg")
 
 [node name="Heart" type="Sprite2D" parent="."]
 position = Vector2(0, -2)
-scale = Vector2(2, 2)
+scale = Vector2(3.75, 3.375)
 texture = ExtResource("2_khu6l")
 centered = false
 hframes = 2

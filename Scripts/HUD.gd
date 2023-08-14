@@ -16,6 +16,7 @@ func _ready():
 func _physics_process(_delta):
 	ammo_label.text = str(Player.ammo)
 	potion_label.text = str(Player.potions)
+		
 
 func on_player_died():
 	if Player.checkpoint == 1:
@@ -27,10 +28,29 @@ func on_player_died():
 		Player.ammo = 6
 		Player.potions = 1
 		
+	elif Player.checkpoint == 2:
+		StageManager.change_stage(StageManager.Room5, 21, 30)
+		get_tree().reload_current_scene()
+		player = get_tree().get_first_node_in_group("Player")
+		Player.current_health = Player.max_health
+		hearts_container.update_hearts(Player.current_health)
+		Player.ammo = Player.saved_ammo
+		Player.potions = Player.saved_potions
+		
+	elif Player.checkpoint == 3:
+		StageManager.change_stage(StageManager.Room2, 37, 57)
+		get_tree().reload_current_scene()
+		player = get_tree().get_first_node_in_group("Player")
+		Player.current_health = Player.max_health
+		hearts_container.update_hearts(Player.current_health)
+		Player.ammo = Player.saved_ammo
+		Player.potions = Player.saved_potions
 
-
-#	var player_inst = PlayerScene.instantiate()
-#	player_inst.global_position = $PlayerSpawn.global_position
-#	add_child(player_inst)
-#	player_inst.connect_camera(camera)
-#	player_died.emit()
+	elif Player.checkpoint == 4:
+		StageManager.change_stage(StageManager.DungeonStart, 32, 190)
+		get_tree().reload_current_scene()
+		player = get_tree().get_first_node_in_group("Player")
+		Player.current_health = Player.max_health
+		hearts_container.update_hearts(Player.current_health)
+		Player.ammo = Player.saved_ammo
+		Player.potions = Player.saved_potions

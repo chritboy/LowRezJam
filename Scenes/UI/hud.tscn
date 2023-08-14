@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://dlm6cv8lf4x3g"]
 
 [ext_resource type="Script" path="res://Scripts/hud.gd" id="1_q8nh2"]
-[ext_resource type="Texture2D" uid="uid://4isu7xpm6r5n" path="res://Graphics/UI/gun.png" id="1_ycahq"]
+[ext_resource type="Texture2D" uid="uid://cqwacf67vs5t2" path="res://Graphics/Characters/Player/Bullet.png" id="2_sjw3v"]
 [ext_resource type="Texture2D" uid="uid://dy5xt7i5epcml" path="res://Graphics/Objects/single_potion.png" id="2_v5t5h"]
 [ext_resource type="FontFile" uid="uid://bygwwji57plty" path="res://Graphics/UI/m3x6.ttf" id="3_buuym"]
 [ext_resource type="PackedScene" uid="uid://se5icbmj2eah" path="res://Functional/hearts_container.tscn" id="4_8qfwx"]
@@ -13,6 +13,7 @@ corner_detail = 16
 
 [sub_resource type="LabelSettings" id="LabelSettings_5hn74"]
 font = ExtResource("3_buuym")
+font_size = 24
 shadow_size = 0
 shadow_color = Color(0, 0, 0, 1)
 
@@ -23,42 +24,42 @@ script = ExtResource("1_q8nh2")
 self_modulate = Color(1, 1, 1, 0.392157)
 offset_left = 37.0
 offset_right = 71.0
-offset_bottom = 8.0
+offset_bottom = 20.0
 scale = Vector2(0.84, 0.76)
 theme_override_styles/panel = SubResource("StyleBoxFlat_7805n")
 
 [node name="Ammo" type="TextureRect" parent="."]
-offset_left = 38.0
-offset_top = 1.0
-offset_right = 43.0
-offset_bottom = 6.0
+offset_left = 39.0
+offset_top = 9.0
+offset_right = 44.0
+offset_bottom = 16.0
 scale = Vector2(0.738584, 0.700397)
-texture = ExtResource("1_ycahq")
+texture = ExtResource("2_sjw3v")
 expand_mode = 1
 flip_h = true
 
 [node name="Potions" type="TextureRect" parent="."]
-offset_left = 60.0
-offset_top = 7.24001
-offset_right = 65.0
-offset_bottom = 12.24
+offset_left = 59.0
+offset_top = 8.0
+offset_right = 66.0
+offset_bottom = 15.0
 scale = Vector2(0.502123, 0.856853)
 texture = ExtResource("2_v5t5h")
 
 [node name="AmmoAmount" type="Label" parent="."]
-offset_left = 43.0
-offset_top = -2.0
-offset_right = 52.0
-offset_bottom = 14.0
+offset_left = 44.0
+offset_top = 4.0
+offset_right = 56.0
+offset_bottom = 26.0
 scale = Vector2(0.643342, 0.629119)
 text = "xx"
 label_settings = SubResource("LabelSettings_5hn74")
 
 [node name="PotionAmount" type="Label" parent="."]
-offset_left = 56.0
+offset_left = 54.0
 offset_top = 4.0
 offset_right = 60.0
-offset_bottom = 20.0
+offset_bottom = 26.0
 scale = Vector2(0.643342, 0.629119)
 text = "x"
 label_settings = SubResource("LabelSettings_5hn74")
@@ -67,9 +68,9 @@ label_settings = SubResource("LabelSettings_5hn74")
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -48.0
+offset_left = -38.0
 offset_top = 1.0
-offset_right = -48.0
+offset_right = -38.0
 offset_bottom = 1.0
 grow_horizontal = 0
 scale = Vector2(0.25, 0.283)

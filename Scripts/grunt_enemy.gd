@@ -18,9 +18,11 @@ enum {
 @onready var hurt_timer = $HurtTimer
 @onready var hitbox = $Hitbox/CollisionShape2D2
 
-@export var exploder = true
+@export var exploder = false
 @export var chase_speed = 30
 @export var fly_spawn : PackedScene
+@export var organ_donor = false
+@export var organ : PackedScene
 
 var wander_speed = 5
 var acceleration = 150
@@ -29,6 +31,7 @@ var current_state = IDLE
 var knockback_power = 70
 var player = null
 var enemy_container = null
+
 
 func _ready():
 	velocity = Vector2.ZERO
@@ -104,6 +107,9 @@ func _on_hurtbox_area_entered(area):
 		if exploder == true:
 			SoundPlayer.play_enemy_explosion()
 			current_state = EXPLODE
+		elif organ_donor == true:
+			current_state = DEATH
+			spawn_organ()
 		else:
 			current_state = DEATH
 	knockback(area.get_parent().velocity)
@@ -144,3 +150,8 @@ func spawn_flies():
 	var fly_inst = fly_spawn.instantiate()
 	fly_inst.global_position = global_position
 	enemy_container.add_child(fly_inst)
+
+func spawn_organ():
+	var organ_inst = organ.instantiate()
+	organ_inst.global_position = global_position
+	enemy_container.add_child(organ_inst)

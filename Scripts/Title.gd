@@ -1,10 +1,7 @@
 extends CanvasLayer
 
-
-
-
 func _on_start_button_up():
-	StageManager.change_stage(StageManager.MainHall, 32, 170)
+	StageManager.change_stage(StageManager.CreationRoom, 37, 51)
 
 func _on_quit_button_up():
 	get_tree().quit()

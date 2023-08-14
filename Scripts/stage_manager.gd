@@ -2,6 +2,13 @@ extends CanvasLayer
 
 const DungeonStart = preload("res://Scenes/Screens/DungeonStart.tscn")
 const CrowHub = preload("res://Scenes/Screens/CrowHub.tscn")
+const WestWing = preload("res://Scenes/Screens/DungeonRoom4.tscn")
+const EastWing = preload("res://Scenes/Screens/DungeonRoom3.tscn")
+const NorthHall = preload("res://Scenes/Screens/DungeonRoom1.tscn")
+const Room5 = preload("res://Scenes/Screens/DungeonRoom5.tscn")
+const Room3 = preload("res://Scenes/Screens/DungeonRoom3.tscn")
+const Room2 = preload("res://Scenes/Screens/DungeonRoom2.tscn")
+const CreationRoom = preload("res://Scenes/Screens/CreationRoom.tscn")
 signal level_loaded
 
 

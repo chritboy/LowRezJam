@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://dqgjs2njhogdv"]
+[gd_scene load_steps=12 format=3 uid="uid://dqgjs2njhogdv"]
 
 [ext_resource type="Script" path="res://Scripts/sound_player.gd" id="1_uoiq2"]
 [ext_resource type="AudioStream" uid="uid://bbef23suxqlum" path="res://Sound/Circular.mp3" id="2_lsdyx"]
@@ -8,6 +8,9 @@
 [ext_resource type="AudioStream" uid="uid://dxfdry0tnq1ul" path="res://Sound/PlayerHeal.mp3" id="6_huhn2"]
 [ext_resource type="AudioStream" uid="uid://bdk2psoopaapn" path="res://Sound/PlayerDeath.mp3" id="8_dgaxn"]
 [ext_resource type="AudioStream" uid="uid://cuyqog4nqyy0b" path="res://Sound/EnemyExplosion.mp3" id="8_gytyt"]
+[ext_resource type="AudioStream" uid="uid://dtquk2eakf6dg" path="res://Sound/PlayerDodge.mp3" id="9_cdv0s"]
+[ext_resource type="AudioStream" uid="uid://bkw2xvd5vaih7" path="res://Sound/DoorLocked.mp3" id="10_2scx1"]
+[ext_resource type="AudioStream" uid="uid://bn14dikpsl8tf" path="res://Sound/ItemPickup.mp3" id="11_ufigf"]
 
 [node name="SoundPlayer" type="Node"]
 process_mode = 3
@@ -37,3 +40,12 @@ stream = ExtResource("8_dgaxn")
 
 [node name="EnemyExplosion" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("8_gytyt")
+
+[node name="PlayerDodge" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("9_cdv0s")
+
+[node name="DoorLocked" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("10_2scx1")
+
+[node name="ItemGrab" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("11_ufigf")

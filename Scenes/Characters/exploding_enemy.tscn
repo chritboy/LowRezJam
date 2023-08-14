@@ -524,7 +524,6 @@ fly_spawn = ExtResource("2_jhkvm")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 clip_children = 2
-rotation = -0.0349066
 texture = ExtResource("2_qpecf")
 hframes = 14
 vframes = 3

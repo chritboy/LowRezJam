@@ -8,6 +8,9 @@ extends Node
 @onready var player_heal = $PlayerHeal
 @onready var player_death = $PlayerDeath
 @onready var enemy_explosion = $EnemyExplosion
+@onready var player_dodge = $PlayerDodge
+@onready var door_locked = $DoorLocked
+@onready var item_grab = $ItemGrab
 
 
 func play_hub():
@@ -15,6 +18,9 @@ func play_hub():
 
 func play_shoot():
 	player_shoot.play()
+	
+func play_dodge():
+	player_dodge.play()
 
 func play_sword():
 	player_sword.play()
@@ -34,6 +40,8 @@ func play_player_death():
 func play_enemy_explosion():
 	enemy_explosion.play()
 
+func play_door_locked():
+	door_locked.play()
 
-func stop_music():
-	hub_music.stop()
+func play_item_grab():
+	item_grab.play()

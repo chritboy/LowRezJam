@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Creation Jam"
-run/main_scene="res://Scenes/Screens/CrowHub.tscn"
+run/main_scene="res://Scenes/UI/Title.tscn"
 config/features=PackedStringArray("4.1", "GL Compatibility")
 config/icon="res://icon.svg"
 
@@ -29,7 +29,7 @@ window/size/viewport_height=64
 window/size/resizable=false
 window/size/window_width_override=640
 window/size/window_height_override=640
-window/stretch/mode="canvas_items"
+window/stretch/mode="viewport"
 window/stretch/aspect="ignore"
 
 [input]
