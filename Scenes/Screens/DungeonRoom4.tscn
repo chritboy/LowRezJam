@@ -1,10 +1,11 @@
-[gd_scene load_steps=22 format=3 uid="uid://cml1ulcg4huoq"]
+[gd_scene load_steps=23 format=3 uid="uid://cml1ulcg4huoq"]
 
 [ext_resource type="Texture2D" uid="uid://c20g3h7i6tlid" path="res://Graphics/Tiles/Crow_Hub_Cut_edited.png" id="1_70i8f"]
 [ext_resource type="Script" path="res://Scripts/DungeonRoom4.gd" id="1_dim5a"]
 [ext_resource type="Texture2D" uid="uid://c2doweloc6654" path="res://Graphics/Tiles/Asset_Page_condensed.png" id="2_ne4jk"]
 [ext_resource type="PackedScene" uid="uid://ep25geblv743" path="res://Scenes/Characters/player.tscn" id="4_lclom"]
 [ext_resource type="PackedScene" uid="uid://dlm6cv8lf4x3g" path="res://Scenes/UI/hud.tscn" id="5_qpsg7"]
+[ext_resource type="PackedScene" uid="uid://by6shptjmpnl3" path="res://Scenes/Characters/grunt_enemy.tscn" id="5_uyry8"]
 [ext_resource type="Texture2D" uid="uid://b5qw2hdp0d04w" path="res://Graphics/Objects/Torch-Sheet.png" id="6_r3lqf"]
 [ext_resource type="PackedScene" uid="uid://bhoudedfwm5mp" path="res://Scenes/Interactables/urn.tscn" id="7_0c5oe"]
 
@@ -11528,6 +11529,24 @@ rotation_smoothing_enabled = true
 
 [node name="Enemies" type="Node" parent="." groups=["EnemyHolder"]]
 
+[node name="EnemyGrunt" parent="Enemies" instance=ExtResource("5_uyry8")]
+position = Vector2(258, 23)
+
+[node name="EnemyGrunt2" parent="Enemies" instance=ExtResource("5_uyry8")]
+position = Vector2(227, 32)
+
+[node name="EnemyGrunt3" parent="Enemies" instance=ExtResource("5_uyry8")]
+position = Vector2(70, 30)
+
+[node name="EnemyGrunt4" parent="Enemies" instance=ExtResource("5_uyry8")]
+position = Vector2(51, 40)
+
+[node name="EnemyGrunt5" parent="Enemies" instance=ExtResource("5_uyry8")]
+position = Vector2(171, 28)
+
+[node name="EnemyGrunt6" parent="Enemies" instance=ExtResource("5_uyry8")]
+position = Vector2(115, 30)
+
 [node name="HUD" parent="." instance=ExtResource("5_qpsg7")]
 process_mode = 3
 
@@ -11755,6 +11774,9 @@ position = Vector2(20, 42)
 position = Vector2(28, 42)
 
 [node name="Urn9" parent="Urns" instance=ExtResource("7_0c5oe")]
+position = Vector2(40, 14)
+
+[node name="Urn10" parent="Urns" instance=ExtResource("7_0c5oe")]
 position = Vector2(40, 14)
 
 [connection signal="body_entered" from="DungeonStart" to="." method="_on_dungeon_start_body_entered"]

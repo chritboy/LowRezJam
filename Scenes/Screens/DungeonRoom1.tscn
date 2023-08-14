@@ -1,11 +1,13 @@
-[gd_scene load_steps=22 format=3 uid="uid://b6welriy0y7hv"]
+[gd_scene load_steps=24 format=3 uid="uid://b6welriy0y7hv"]
 
 [ext_resource type="Script" path="res://Scripts/DungeonRoom1.gd" id="1_apysg"]
 [ext_resource type="Texture2D" uid="uid://c20g3h7i6tlid" path="res://Graphics/Tiles/Crow_Hub_Cut_edited.png" id="1_gock4"]
 [ext_resource type="Texture2D" uid="uid://c2doweloc6654" path="res://Graphics/Tiles/Asset_Page_condensed.png" id="2_w6q7v"]
 [ext_resource type="PackedScene" uid="uid://ep25geblv743" path="res://Scenes/Characters/player.tscn" id="3_jfjuu"]
 [ext_resource type="PackedScene" uid="uid://dlm6cv8lf4x3g" path="res://Scenes/UI/hud.tscn" id="4_b43lm"]
+[ext_resource type="PackedScene" uid="uid://by6shptjmpnl3" path="res://Scenes/Characters/grunt_enemy.tscn" id="5_gb1f8"]
 [ext_resource type="Texture2D" uid="uid://b5qw2hdp0d04w" path="res://Graphics/Objects/Torch-Sheet.png" id="6_fg58p"]
+[ext_resource type="PackedScene" uid="uid://6y156x7mfdqe" path="res://Scenes/Characters/exploding_enemy.tscn" id="6_nvepu"]
 [ext_resource type="PackedScene" uid="uid://bhoudedfwm5mp" path="res://Scenes/Interactables/urn.tscn" id="7_sd41b"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_mgowq"]
@@ -7869,6 +7871,25 @@ position_smoothing_speed = 10.0
 rotation_smoothing_enabled = true
 
 [node name="Enemies" type="Node" parent="." groups=["EnemyHolder"]]
+
+[node name="EnemyGrunt" parent="Enemies" instance=ExtResource("5_gb1f8")]
+position = Vector2(242, 61)
+
+[node name="EnemyGrunt2" parent="Enemies" instance=ExtResource("5_gb1f8")]
+position = Vector2(259, 86)
+
+[node name="EnemyGrunt3" parent="Enemies" instance=ExtResource("5_gb1f8")]
+position = Vector2(279, 15)
+
+[node name="EnemyGrunt4" parent="Enemies" instance=ExtResource("5_gb1f8")]
+position = Vector2(80, 13)
+
+[node name="EnemyGrunt5" parent="Enemies" instance=ExtResource("5_gb1f8")]
+position = Vector2(123, 23)
+
+[node name="EnemyGrunt6" parent="Enemies" instance=ExtResource("6_nvepu")]
+position = Vector2(187, 15)
+exploder = true
 
 [node name="HUD" parent="." instance=ExtResource("4_b43lm")]
 process_mode = 3

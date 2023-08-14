@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://c2mj1mleltsve"]
+[gd_scene load_steps=29 format=3 uid="uid://c2mj1mleltsve"]
 
 [ext_resource type="Script" path="res://Scripts/DungeonRoom5.gd" id="1_gj1l4"]
 [ext_resource type="Texture2D" uid="uid://c20g3h7i6tlid" path="res://Graphics/Tiles/Crow_Hub_Cut_edited.png" id="1_jqh25"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://cl0xitlik25uo" path="res://Scenes/Interactables/stomach.tscn" id="7_fycy0"]
 [ext_resource type="Texture2D" uid="uid://bojhl40u881ar" path="res://Graphics/Objects/Lamp-Sheet.png" id="8_mbeeg"]
 [ext_resource type="PackedScene" uid="uid://bhoudedfwm5mp" path="res://Scenes/Interactables/urn.tscn" id="9_j1l3k"]
+[ext_resource type="PackedScene" uid="uid://6y156x7mfdqe" path="res://Scenes/Characters/exploding_enemy.tscn" id="10_bprr6"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ggo58"]
 texture = ExtResource("1_jqh25")
@@ -11324,6 +11325,9 @@ position = Vector2(16, -50)
 
 [node name="Urn13" parent="Urns" instance=ExtResource("9_j1l3k")]
 position = Vector2(24, -50)
+
+[node name="EnemyGrunt" parent="." instance=ExtResource("10_bprr6")]
+position = Vector2(88, 25)
 
 [connection signal="body_entered" from="WestWing" to="." method="_on_west_wing_body_entered"]
 

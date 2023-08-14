@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://bc1xue7jvgvfu"]
+[gd_scene load_steps=26 format=3 uid="uid://bc1xue7jvgvfu"]
 
 [ext_resource type="Script" path="res://Scripts/DungeonStart.gd" id="1_fgqq6"]
 [ext_resource type="Texture2D" uid="uid://c2doweloc6654" path="res://Graphics/Tiles/Asset_Page_condensed.png" id="2_e5kjd"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://t851obn431ud" path="res://Scenes/Characters/organ_enemy.tscn" id="6_3ww1p"]
 [ext_resource type="PackedScene" uid="uid://c0lqo0hinjfj0" path="res://Scenes/Interactables/heart.tscn" id="6_hqpay"]
 [ext_resource type="Texture2D" uid="uid://b5qw2hdp0d04w" path="res://Graphics/Objects/Torch-Sheet.png" id="7_7bfl3"]
+[ext_resource type="PackedScene" uid="uid://by6shptjmpnl3" path="res://Scenes/Characters/grunt_enemy.tscn" id="8_dr8so"]
 [ext_resource type="PackedScene" uid="uid://bhoudedfwm5mp" path="res://Scenes/Interactables/urn.tscn" id="9_ygofg"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_mdcce"]
@@ -13108,6 +13109,24 @@ organ = ExtResource("6_hqpay")
 
 [node name="Stats" parent="Enemies/OrganEnemy" index="8"]
 max_health = 8
+
+[node name="EnemyGrunt" parent="Enemies" instance=ExtResource("8_dr8so")]
+position = Vector2(31, 123)
+
+[node name="EnemyGrunt2" parent="Enemies" instance=ExtResource("8_dr8so")]
+position = Vector2(40, 94)
+
+[node name="EnemyGrunt3" parent="Enemies" instance=ExtResource("8_dr8so")]
+position = Vector2(45, -5)
+
+[node name="EnemyGrunt4" parent="Enemies" instance=ExtResource("8_dr8so")]
+position = Vector2(24, 17)
+
+[node name="EnemyGrunt5" parent="Enemies" instance=ExtResource("8_dr8so")]
+position = Vector2(71, 39)
+
+[node name="EnemyGrunt6" parent="Enemies" instance=ExtResource("8_dr8so")]
+position = Vector2(-29, 31)
 
 [node name="CrowHubDoor" type="Area2D" parent="."]
 position = Vector2(20, 198)
